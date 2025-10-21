@@ -1,0 +1,55 @@
+<div class="movie-card"> 
+  <h2><%= @movie.title %></h2>
+  <p>
+    <strong>Diretor:</strong> <%= @movie.director %> | 
+    <strong>Ano:</strong> <%= @movie.year %> | 
+    <strong>Duração:</strong> <%= @movie.duration %> min
+  </p>
+
+  <% if @movie.poster.attached? %>
+    <div class="poster mb-2">
+      <%= image_tag @movie.poster.variant(resize_to_limit: [300, 450]), class: "img-thumbnail" %>
+    </div>
+  <% end %>
+
+  <p><%= @movie.synopsis %></p>
+
+  <p><strong>Categorias:</strong> <%= @movie.categories.pluck(:name).join(", ") %></p>
+
+  <!-- Tags como badges -->
+  <p><strong>Tags:</strong>
+    <% @movie.tags.each do |tag| %>
+      <span class="tag-badge"><%= tag.name %></span>
+    <% end %>
+  </p>
+
+  <% if user_signed_in? && @movie.user == current_user %>
+    <%= link_to "Editar", edit_movie_path(@movie), class: "button" %> |
+    <%= link_to "Apagar", movie_path(@movie), method: :delete, data: { confirm: "Tem certeza?" }, class: "button" %>
+  <% end %>
+</div>
+
+<div class="comments">
+  <h3>Comentários</h3>
+
+  <% @movie.comments.each do |comment| %>
+    <div class="comment">
+      <strong><%= comment.user.name %>:</strong> <%= comment.content %>
+      <% if comment.user == current_user %>
+        | <%= button_to "Apagar", movie_comment_path(@movie, comment), method: :delete, data: { confirm: "Tem certeza?" }, class: "button" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@movie, Comment.new], local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :content, "Adicionar comentário" %>
+        <%= f.text_area :content, rows: 3, class: "form-control" %>
+      </div>
+      <button type="submit">Comentar</button>
+    <% end %>
+  <% else %>
+    <p><%= link_to "Faça login", new_user_session_path %> para comentar.</p>
+  <% end %>
+</div>

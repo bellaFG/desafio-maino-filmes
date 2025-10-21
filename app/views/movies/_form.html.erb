@@ -1,0 +1,59 @@
+<%= form_with(model: @movie, local: true, html: { multipart: true }) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "Título" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :synopsis, "Sinopse" %>
+    <%= f.text_area :synopsis, rows: 4, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :year, "Ano" %>
+    <%= f.number_field :year, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :duration, "Duração (minutos)" %>
+    <%= f.number_field :duration, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :director, "Diretor" %>
+    <%= f.text_field :director, class: "form-control" %>
+  </div>
+
+  <!-- Categorias -->
+  <div class="form-group">
+    <%= f.label :categories, "Categorias" %>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+      <div class="form-check">
+        <%= cb.check_box(class: "form-check-input") %>
+        <%= cb.text %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Tags -->
+  <div class="form-group">
+    <%= f.label :tag_list, "Tags (separe por vírgulas)" %>
+    <%= f.text_field :tag_list, value: @movie.tags.pluck(:name).join(", "), class: "form-control" %>
+  </div>
+
+  <!-- Upload de poster -->
+  <div class="form-group">
+    <%= f.label :poster, "Poster do Filme" %>
+    <%= f.file_field :poster, class: "form-control" %>
+
+    <% if @movie.poster.attached? %>
+      <div class="mt-2">
+        <%= image_tag @movie.poster.variant(resize_to_limit: [200, 300]), class: "img-thumbnail" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Salvar", class: "btn btn-primary" %>
+  </div>
+<% end %>

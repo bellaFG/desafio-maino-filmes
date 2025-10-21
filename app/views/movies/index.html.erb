@@ -1,0 +1,49 @@
+<h2>Movies</h2>
+
+<!-- Botão do filtro -->
+<div class="filter-toggle-container">
+  <button id="toggle-filter" class="filter-toggle-btn">Filter ▾</button>
+</div>
+
+<!-- Painel oculto -->
+<div id="filter-panel" class="hidden filter-panel">
+  <%= form_with url: movies_path, method: :get, local: true, class: "filter-form" do |f| %>
+    <div class="form-row">
+      <div class="form-group">
+        <%= f.label :title, "Search by title" %>
+        <%= f.text_field :title, value: params[:title], class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :year, "Year" %>
+        <%= f.number_field :year, value: params[:year], class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :director, "Director" %>
+        <%= f.text_field :director, value: params[:director], class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn-filter">Apply Filters</button>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <%= link_to "Add New Movie", new_movie_path, class: "add-movie-btn" %>
+<% end %>
+
+<hr>
+
+<% @movies.each do |movie| %>
+  <div class="movie-card">
+    <h3><%= link_to movie.title, movie_path(movie), class: "movie-title" %></h3>
+    <p><strong>Director:</strong> <%= movie.director %> | <strong>Year:</strong> <%= movie.year %></p>
+    <p><%= truncate(movie.synopsis, length: 150) %></p>
+    <p><strong>Categories:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
+  </div>
+<% end %>
+
+<%= paginate @movies %>
