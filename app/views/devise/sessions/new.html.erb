@@ -1,0 +1,17 @@
+<h2>Login</h2>
+
+<%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+  </div>
+
+  <button type="submit">Entrar</button>
+<% end %>
+
+<%= link_to "Esqueceu sua senha?", new_password_path(resource_name) %>
