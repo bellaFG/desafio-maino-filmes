@@ -5,11 +5,10 @@ module MoviesHelper
 
     begin
       # Força o uso de MiniMagick
-      poster.variant(resize_to_limit: [width, height], processor: :mini_magick).processed
+      poster.variant(resize_to_limit: [ width, height ], processor: :mini_magick).processed
     rescue => e
       Rails.logger.error "Erro ao gerar variante: #{e.message}"
       poster
     end
   end
 end
-

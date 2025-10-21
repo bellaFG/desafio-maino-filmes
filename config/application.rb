@@ -6,13 +6,13 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module maino_filmes
+module MainoFilmes
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
     # I18n: internacionalização
-    config.i18n.available_locales = [:pt, :en]
+    config.i18n.available_locales = [ :pt, :en ]
     config.i18n.default_locale = :pt
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
@@ -29,4 +29,3 @@ module maino_filmes
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
-

@@ -62,11 +62,11 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'devise'
-gem 'pagy'
-gem 'pundit'     # opcional, para autorização
-gem 'sidekiq'    # opcional, para importação CSV em background
+gem "devise"
+gem "pagy"
+gem "pundit"     # opcional, para autorização
+gem "sidekiq"    # opcional, para importação CSV em background
 
 gem "kaminari", "~> 1.2"
-gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
+gem "mini_magick"
+gem "image_processing", "~> 1.2"

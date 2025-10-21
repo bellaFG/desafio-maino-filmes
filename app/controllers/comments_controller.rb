@@ -7,9 +7,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @movie, notice: 'Comentário adicionado com sucesso.'
+      redirect_to @movie, notice: "Comentário adicionado com sucesso."
     else
-      redirect_to @movie, alert: 'Não foi possível adicionar o comentário.'
+      redirect_to @movie, alert: "Não foi possível adicionar o comentário."
     end
   end
 
@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
     @comment = @movie.comments.find(params[:id])
     if @comment.user == current_user
       @comment.destroy
-      redirect_to @movie, notice: 'Comentário removido.'
+      redirect_to @movie, notice: "Comentário removido."
     else
-      redirect_to @movie, alert: 'Você não pode excluir este comentário.'
+      redirect_to @movie, alert: "Você não pode excluir este comentário."
     end
   end
 
