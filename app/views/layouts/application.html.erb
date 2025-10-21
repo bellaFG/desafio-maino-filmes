@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Maino Filmes</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <header>
+    <h1><a href="<%= movies_path %>">Maino Filmes</a></h1>
+    <nav>
+      <% if user_signed_in? %>
+        Olá, <%= current_user.name %> |
+        <%= link_to "Perfil", edit_user_registration_path %> |
+        <%= link_to "Sair", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path %> |
+        <%= link_to "Cadastrar", new_user_registration_path %>
+      <% end %>
+    </nav>
+  </header>
+
+  <main>
+    <% if notice %>
+      <div class="notice"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert"><%= alert %></div>
+    <% end %>
+
+    <%= yield %>
+  </main>
+
+  <footer>
+    &copy; <%= Time.current.year %> Maino Filmes
+  </footer>
+</body>
+</html>
