@@ -1,5 +1,16 @@
-pt-BR:
+pt:
   hello: "Olá"
+
+  search:
+    placeholder: "Buscar..."
+    button: "Buscar"
+
+  header:
+    hello: "Olá"
+    profile: "Perfil"
+    logout: "Sair"
+    login: "Login"
+    register: "Cadastrar"
 
   movies:
     index:
