@@ -1,32 +1,31 @@
 <div id="<%= dom_id movie %>">
   <p>
-    <strong>Title:</strong>
+    <strong><%= t('movies.show.title') %>:</strong>
     <%= movie.title %>
   </p>
 
   <p>
-    <strong>Synopsis:</strong>
+    <strong><%= t('movies.show.synopsis') %>:</strong>
     <%= movie.synopsis %>
   </p>
 
   <p>
-    <strong>Year:</strong>
+    <strong><%= t('movies.show.year') %>:</strong>
     <%= movie.year %>
   </p>
 
   <p>
-    <strong>Duration:</strong>
+    <strong><%= t('movies.show.duration') %>:</strong>
     <%= movie.duration %>
   </p>
 
   <p>
-    <strong>Director:</strong>
+    <strong><%= t('movies.show.director') %>:</strong>
     <%= movie.director %>
   </p>
 
   <p>
-    <strong>User:</strong>
+    <strong><%= t('movies.show.user') %>:</strong>
     <%= movie.user_id %>
   </p>
-
 </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<%= I18n.locale %>">
 <head>
   <meta charset="UTF-8">
   <title>Maino Filmes</title>
@@ -11,28 +11,33 @@
 </head>
 <body>
   <header>
-  <h1><a href="<%= movies_path %>">Maino Filmes</a></h1>
+    <h1><a href="<%= movies_path %>">Maino Filmes</a></h1>
 
-  <div class="header-center">
-  <%= form_with url: movies_path, method: :get, local: true, class: "search-form" do |f| %>
-    <%= f.text_field :q, placeholder: "Buscar por título, diretor ou ano", value: params[:q] %>
-    <button type="submit">Buscar</button>
-  <% end %>
-</div>
-
-  <div class="header-right">
-    <nav>
-      <% if user_signed_in? %>
-        Olá, <%= current_user.name %> |
-        <%= link_to "Perfil", edit_user_registration_path %> |
-        <%= link_to "Sair", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path %> |
-        <%= link_to "Cadastrar", new_user_registration_path %>
+    <div class="header-center">
+      <%= form_with url: movies_path, method: :get, local: true, class: "search-form" do |f| %>
+        <%= f.text_field :q, placeholder: t('search.placeholder'), value: params[:q] %>
+        <button type="submit"><%= t('search.button') %></button>
       <% end %>
-    </nav>
-  </div>
-</header>
+    </div>
+
+    <div class="header-right">
+      <nav>
+        <% if user_signed_in? %>
+          <%= t('header.hello') %>, <%= current_user.name %> |
+          <%= link_to t('header.profile'), edit_user_registration_path %> |
+          <%= link_to t('header.logout'), destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to t('header.login'), new_user_session_path %> |
+          <%= link_to t('header.register'), new_user_registration_path %>
+        <% end %>
+
+      <!-- Seletor de idioma funcional -->
+      | <a href="#" onclick="window.location.href='?locale=en'; return false;">EN</a> |
+      <a href="#" onclick="window.location.href='?locale=pt-BR'; return false;">PT</a>
+
+      </nav>
+    </div>
+  </header>
 
   <main>
     <% if notice %>

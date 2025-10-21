@@ -1,8 +1,8 @@
-<h2>Movies</h2>
+<h2><%= t('movies.index.title') %></h2>
 
 <!-- Botão do filtro -->
 <div class="filter-toggle-container">
-  <button id="toggle-filter" class="filter-toggle-btn">Filter ▾</button>
+  <button id="toggle-filter" class="filter-toggle-btn"><%= t('movies.index.filter') %> ▾</button>
 </div>
 
 <!-- Painel oculto -->
@@ -10,29 +10,29 @@
   <%= form_with url: movies_path, method: :get, local: true, class: "filter-form" do |f| %>
     <div class="form-row">
       <div class="form-group">
-        <%= f.label :year, "Year" %>
+        <%= f.label :year, t('movies.index.filters.year') %>
         <%= f.number_field :year, value: params[:year], class: "form-control" %>
       </div>
 
       <div class="form-group">
-        <%= f.label :director, "Director" %>
+        <%= f.label :director, t('movies.index.filters.director') %>
         <%= f.text_field :director, value: params[:director], class: "form-control" %>
       </div>
       
-        <div class="form-group">
-        <%= f.label :categories, "Category" %>
+      <div class="form-group">
+        <%= f.label :categories, t('movies.index.filters.categories') %>
         <%= f.text_field :categories, value: params[:categories], class: "form-control" %>
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn-filter">Apply Filters</button>
+        <button type="submit" class="btn-filter"><%= t('movies.index.filters.apply') %></button>
       </div>
     </div>
   <% end %>
 </div>
 
 <% if user_signed_in? %>
-  <%= link_to "Add New Movie", new_movie_path, class: "add-movie-btn" %>
+  <%= link_to t('movies.index.add_new'), new_movie_path, class: "add-movie-btn" %>
 <% end %>
 
 <hr>
@@ -47,18 +47,19 @@
       </div>
     <% end %>
 
-    <p><strong>Director:</strong> <%= movie.director %> | <strong>Year:</strong> <%= movie.year %></p>
+    <p><strong><%= t('movies.index.director') %>:</strong> <%= movie.director %> | 
+       <strong><%= t('movies.index.year') %>:</strong> <%= movie.year %></p>
     <p><%= truncate(movie.synopsis, length: 150) %></p>
-    <p><strong>Categories:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
+    <p><strong><%= t('movies.index.categories') %>:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
 
     <% if user_signed_in? && movie.user == current_user %>
-      <%= link_to "Editar", edit_movie_path(movie), class: "button" %> |
-      <%= button_to "Apagar", movie_path(movie), method: :delete, data: { confirm: "Tem certeza?" }, class: "button" %>
+      <%= link_to t('movies.index.edit'), edit_movie_path(movie), class: "button" %> |
+      <%= button_to t('movies.index.delete'), movie_path(movie), method: :delete, 
+            data: { confirm: t('movies.index.confirm_delete') }, class: "button" %>
     <% end %>
 
-    <%= link_to "Ver detalhes", movie_path(movie), class: "button" %>
+    <%= link_to t('movies.index.view_details'), movie_path(movie), class: "button" %>
   </div>
 <% end %>
-
 
 <%= paginate @movies %>

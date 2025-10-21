@@ -1,0 +1,58 @@
+pt-BR:
+  hello: "Olá"
+
+  movies:
+    index:
+      title: "Filmes"
+      filter: "Filtro"
+      add_new: "Adicionar Novo Filme"
+      director: "Diretor"
+      year: "Ano"
+      categories: "Categorias"
+      view_details: "Ver detalhes"
+      edit: "Editar"
+      delete: "Apagar"
+      confirm_delete: "Tem certeza?"
+      filters:
+        year: "Ano"
+        director: "Diretor"
+        categories: "Categoria"
+        apply: "Aplicar Filtros"
+
+    show:
+      director: "Diretor"
+      year: "Ano"
+      duration: "Duração"
+      categories: "Categorias"
+      tags: "Tags"
+      edit: "Editar"
+      delete: "Apagar"
+      confirm_delete: "Tem certeza?"
+      comments: "Comentários"
+      add_comment: "Adicionar comentário"
+      comment: "Comentar"
+      login_to_comment: "Faça login para comentar."
+
+    form:
+      title: "Título"
+      synopsis: "Sinopse"
+      year: "Ano"
+      duration: "Duração (minutos)"
+      director: "Diretor"
+      categories: "Categorias"
+      tags: "Tags (separe por vírgulas)"
+      poster: "Poster do Filme"
+      submit: "Salvar"
+
+    new:
+      title: "Novo Filme"
+      back: "Voltar para filmes"
+
+    edit:
+      title: "Editar Filme"
+      back: "Voltar para filmes"
+
+  flash:
+    created: "Filme criado com sucesso."
+    updated: "Filme atualizado com sucesso."
+    destroyed: "Filme apagado com sucesso."

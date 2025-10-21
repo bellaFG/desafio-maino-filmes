@@ -5,9 +5,9 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
-  @movies = Movie.order(created_at: :desc)
-  @movies = @movies.search(params[:q])
-  @movies = @movies.page(params[:page]).per(6)
+    @movies = Movie.order(created_at: :desc)
+    @movies = @movies.search(params[:q])
+    @movies = @movies.page(params[:page]).per(6)
   end
 
   # GET /movies/1
@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: "Filme criado com sucesso!" }
+        format.html { redirect_to @movie, notice: t('flash.created') }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: "Filme atualizado com sucesso!", status: :see_other }
+        format.html { redirect_to @movie, notice: t('flash.updated'), status: :see_other }
         format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class MoviesController < ApplicationController
   def destroy
     @movie.destroy!
     respond_to do |format|
-      format.html { redirect_to movies_path, notice: "Filme excluído com sucesso!", status: :see_other }
+      format.html { redirect_to movies_path, notice: t('flash.destroyed'), status: :see_other }
       format.json { head :no_content }
     end
   end
@@ -68,7 +68,7 @@ class MoviesController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to movies_path, alert: "Não autorizado" unless @movie.user == current_user
+    redirect_to movies_path, alert: t('flash.unauthorized') unless @movie.user == current_user
   end
 
   # 🎯 Permite campos de categorias, poster e tags

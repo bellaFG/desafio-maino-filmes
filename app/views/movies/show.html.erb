@@ -1,9 +1,9 @@
 <div class="movie-card"> 
   <h2><%= @movie.title %></h2>
   <p>
-    <strong>Diretor:</strong> <%= @movie.director %> | 
-    <strong>Ano:</strong> <%= @movie.year %> | 
-    <strong>Duração:</strong> <%= @movie.duration %> min
+    <strong><%= t('movies.show.director') %>:</strong> <%= @movie.director %> | 
+    <strong><%= t('movies.show.year') %>:</strong> <%= @movie.year %> | 
+    <strong><%= t('movies.show.duration') %>:</strong> <%= @movie.duration %> min
   </p>
 
   <% if @movie.poster.attached? %>
@@ -13,14 +13,14 @@
   <% end %>
 
   <% if user_signed_in? && @movie.user == current_user %>
-    <%= link_to "Editar", edit_movie_path(@movie), class: "button" %> |
-    <%= button_to "Apagar", movie_path(@movie), method: :delete, data: { confirm: "Tem certeza?" }, class: "button" %>
+    <%= link_to t('movies.show.edit'), edit_movie_path(@movie), class: "button" %> |
+    <%= button_to t('movies.show.delete'), movie_path(@movie), method: :delete, data: { confirm: t('movies.show.confirm_delete') }, class: "button" %>
   <% end %>
 
   <p><%= @movie.synopsis %></p>
-  <p><strong>Categorias:</strong> <%= @movie.categories.pluck(:name).join(", ") %></p>
+  <p><strong><%= t('movies.show.categories') %>:</strong> <%= @movie.categories.pluck(:name).join(", ") %></p>
 
-  <p><strong>Tags:</strong>
+  <p><strong><%= t('movies.show.tags') %>:</strong>
     <% @movie.tags.each do |tag| %>
       <span class="tag-badge"><%= tag.name %></span>
     <% end %>
@@ -28,13 +28,13 @@
 </div>
 
 <div class="comments">
-  <h3>Comentários</h3>
+  <h3><%= t('movies.show.comments') %></h3>
 
   <% @movie.comments.each do |comment| %>
     <div class="comment">
       <strong><%= comment.user.name %>:</strong> <%= comment.content %>
       <% if comment.user == current_user %>
-        <%= button_to "Apagar", movie_comment_path(@movie, comment), method: :delete, data: { confirm: "Tem certeza?" }, class: "button" %>
+        <%= button_to t('movies.show.delete'), movie_comment_path(@movie, comment), method: :delete, data: { confirm: t('movies.show.confirm_delete') }, class: "button" %>
       <% end %>
     </div>
   <% end %>
@@ -42,12 +42,12 @@
   <% if user_signed_in? %>
     <%= form_with(model: [@movie, Comment.new], local: true) do |f| %>
       <div class="form-group">
-        <%= f.label :content, "Adicionar comentário" %>
+        <%= f.label :content, t('movies.show.add_comment') %>
         <%= f.text_area :content, rows: 3, class: "form-control" %>
       </div>
-      <button type="submit">Comentar</button>
+      <button type="submit"><%= t('movies.show.comment') %></button>
     <% end %>
   <% else %>
-    <p><%= link_to "Faça login", new_user_session_path %> para comentar.</p>
+    <p><%= link_to t('movies.show.login_to_comment'), new_user_session_path %></p>
   <% end %>
 </div>

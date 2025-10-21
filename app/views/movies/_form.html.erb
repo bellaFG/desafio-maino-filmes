@@ -1,32 +1,32 @@
-<%= form_with(model: @movie, local: true, html: { multipart: true }) do |f| %>
+<%= form_with(model: @movie, local: true, html: { multipart: true }) do |f| %> 
   <div class="form-group">
-    <%= f.label :title, "Título" %>
+    <%= f.label :title, t('movies.form.title') %>
     <%= f.text_field :title, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :synopsis, "Sinopse" %>
+    <%= f.label :synopsis, t('movies.form.synopsis') %>
     <%= f.text_area :synopsis, rows: 4, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :year, "Ano" %>
+    <%= f.label :year, t('movies.form.year') %>
     <%= f.number_field :year, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :duration, "Duração (minutos)" %>
+    <%= f.label :duration, t('movies.form.duration') %>
     <%= f.number_field :duration, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :director, "Diretor" %>
+    <%= f.label :director, t('movies.form.director') %>
     <%= f.text_field :director, class: "form-control" %>
   </div>
 
   <!-- Categorias -->
   <div class="form-group">
-    <%= f.label :categories, "Categorias" %>
+    <%= f.label :categories, t('movies.form.categories') %>
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
       <div class="form-check">
         <%= cb.check_box(class: "form-check-input") %>
@@ -37,13 +37,13 @@
 
   <!-- Tags -->
   <div class="form-group">
-    <%= f.label :tag_list, "Tags (separe por vírgulas)" %>
+    <%= f.label :tag_list, t('movies.form.tags') %>
     <%= f.text_field :tag_list, value: @movie.tags.pluck(:name).join(", "), class: "form-control" %>
   </div>
 
   <!-- Upload de poster -->
   <div class="form-group">
-    <%= f.label :poster, "Poster do Filme" %>
+    <%= f.label :poster, t('movies.form.poster') %>
     <%= f.file_field :poster, class: "form-control" %>
 
     <% if @movie.poster.attached? %>
@@ -54,6 +54,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Salvar", class: "btn btn-primary" %>
+    <%= f.submit t('movies.form.submit'), class: "btn btn-primary" %>
   </div>
 <% end %>

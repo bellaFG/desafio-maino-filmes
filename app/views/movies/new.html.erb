@@ -1,11 +1,11 @@
-<% content_for :title, "New movie" %>
+<% content_for :title, t('movies.new.title') %>
 
-<h1>New movie</h1>
+<h1><%= t('movies.new.title') %></h1>
 
 <%= render "form", movie: @movie %>
 
 <br>
 
 <div>
-  <%= link_to "Back to movies", movies_path %>
+  <%= link_to t('movies.new.back'), movies_path %>
 </div>
