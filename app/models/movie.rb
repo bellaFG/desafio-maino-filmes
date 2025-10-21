@@ -7,7 +7,13 @@ class Movie < ApplicationRecord
 
   validates :title, :year, :director, presence: true
 
-  scope :by_title, ->(title) { where("title ILIKE ?", "%#{title}%") if title.present? }
-  scope :by_year, ->(year) { where(year: year) if year.present? }
-  scope :by_director, ->(director) { where("director ILIKE ?", "%#{director}%") if director.present? }
+  # ----- BUSCA GERAL (único campo) -----
+  scope :search, ->(query) {
+    if query.present?
+      where("title ILIKE :q OR director ILIKE :q OR CAST(year AS TEXT) ILIKE :q", q: "%#{query}%")
+    end
+  }
+
+  # ----- FILTROS -----
+  scope :by_category, ->(category) { joins(:categories).where(categories: { name: category }) if category.present? }
 end

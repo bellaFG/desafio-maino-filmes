@@ -5,11 +5,9 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
-    @movies = Movie.order(created_at: :desc)
-                   .by_title(params[:title])
-                   .by_year(params[:year])
-                   .by_director(params[:director])
-                   .page(params[:page]).per(6)
+  @movies = Movie.order(created_at: :desc)
+  @movies = @movies.search(params[:q])
+  @movies = @movies.page(params[:page]).per(6)
   end
 
   # GET /movies/1

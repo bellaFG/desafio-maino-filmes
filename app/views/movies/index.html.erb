@@ -10,11 +10,6 @@
   <%= form_with url: movies_path, method: :get, local: true, class: "filter-form" do |f| %>
     <div class="form-row">
       <div class="form-group">
-        <%= f.label :title, "Search by title" %>
-        <%= f.text_field :title, value: params[:title], class: "form-control" %>
-      </div>
-
-      <div class="form-group">
         <%= f.label :year, "Year" %>
         <%= f.number_field :year, value: params[:year], class: "form-control" %>
       </div>
@@ -22,6 +17,11 @@
       <div class="form-group">
         <%= f.label :director, "Director" %>
         <%= f.text_field :director, value: params[:director], class: "form-control" %>
+      </div>
+      
+        <div class="form-group">
+        <%= f.label :categories, "Category" %>
+        <%= f.text_field :categories, value: params[:categories], class: "form-control" %>
       </div>
 
       <div class="form-group">
@@ -40,10 +40,25 @@
 <% @movies.each do |movie| %>
   <div class="movie-card">
     <h3><%= link_to movie.title, movie_path(movie), class: "movie-title" %></h3>
+
+    <% if movie.poster.attached? %>
+      <div class="poster mb-2">
+        <%= image_tag poster_variant(movie.poster), class: "poster-img" %>
+      </div>
+    <% end %>
+
     <p><strong>Director:</strong> <%= movie.director %> | <strong>Year:</strong> <%= movie.year %></p>
     <p><%= truncate(movie.synopsis, length: 150) %></p>
     <p><strong>Categories:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
+
+    <% if user_signed_in? && movie.user == current_user %>
+      <%= link_to "Editar", edit_movie_path(movie), class: "button" %> |
+      <%= button_to "Apagar", movie_path(movie), method: :delete, data: { confirm: "Tem certeza?" }, class: "button" %>
+    <% end %>
+
+    <%= link_to "Ver detalhes", movie_path(movie), class: "button" %>
   </div>
 <% end %>
+
 
 <%= paginate @movies %>
