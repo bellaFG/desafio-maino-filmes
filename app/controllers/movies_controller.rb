@@ -73,10 +73,10 @@ class MoviesController < ApplicationController
 
   # 🎯 Permite campos de categorias, poster e tags
   def movie_params
-    params.require(:movie).permit(
-      :title, :synopsis, :year, :duration, :director, :poster, category_ids: []
-    )
-  end
+  params.require(:movie).permit(
+    :title, :synopsis, :year, :duration, :director, :poster, :remove_poster, category_ids: []
+  )
+end
 
   # 💡 Converte o campo de texto em tags reais (salva/cria)
   def assign_tags

@@ -33,7 +33,9 @@
   <% @movie.comments.each do |comment| %>
     <div class="comment">
       <strong><%= comment.user.name %>:</strong> <%= comment.content %>
+      
       <% if comment.user == current_user %>
+        <%= link_to t('movies.show.edit'), edit_movie_comment_path(@movie, comment), class: "button" %> |
         <%= button_to t('movies.show.delete'), movie_comment_path(@movie, comment), method: :delete, data: { confirm: t('movies.show.confirm_delete') }, class: "button" %>
       <% end %>
     </div>
@@ -51,3 +53,4 @@
     <p><%= link_to t('movies.show.login_to_comment'), new_user_session_path %></p>
   <% end %>
 </div>
+

@@ -42,16 +42,23 @@
   </div>
 
   <!-- Upload de poster -->
-  <div class="form-group">
-    <%= f.label :poster, t('movies.form.poster') %>
-    <%= f.file_field :poster, class: "form-control" %>
+<div class="form-group">
+  <%= f.label :poster, t('movies.form.poster') %>
+  <%= f.file_field :poster, class: "form-control" %>
 
-    <% if @movie.poster.attached? %>
-      <div class="mt-2">
-        <%= image_tag @movie.poster.variant(resize_to_limit: [200, 300]), class: "img-thumbnail" %>
+  <% if @movie.poster.attached? %>
+    <div class="mt-2">
+      <%= image_tag @movie.poster.variant(resize_to_limit: [200, 300]), class: "img-thumbnail" %>
+
+      <!-- Checkbox para remover poster -->
+      <div class="form-check mt-1">
+        <%= f.check_box :remove_poster, class: "form-check-input" %>
+        <%= f.label :remove_poster, t('movies.form.remove_poster'), class: "form-check-label" %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
+
 
   <div class="actions">
     <%= f.submit t('movies.form.submit'), class: "btn btn-primary" %>
