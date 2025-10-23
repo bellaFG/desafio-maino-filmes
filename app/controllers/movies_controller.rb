@@ -4,9 +4,18 @@ class MoviesController < ApplicationController
   before_action :authorize_user!, only: %i[edit update destroy]
 
   def index
-    @movies = Movie.order(created_at: :desc)
-    @movies = @movies.search(params[:q])
-    @movies = @movies.page(params[:page]).per(6)
+    @movies = Movie.all
+
+    # 🔍 Filtros
+    @movies = @movies.where(year: params[:year]) if params[:year].present?
+    @movies = @movies.joins(:categories).where(categories: { name: params[:category] }) if params[:category].present?
+    @movies = @movies.where("director ILIKE ?", "%#{params[:director]}%") if params[:director].present?
+
+    # 🔎 Busca
+    @movies = @movies.search(params[:q]) if params[:q].present?
+
+    # 🔄 Ordenação e paginação
+    @movies = @movies.order(created_at: :desc).page(params[:page]).per(6)
   end
 
   def show
