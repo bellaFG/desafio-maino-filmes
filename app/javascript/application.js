@@ -1,7 +1,9 @@
+// app/javascript/application.js
+
 import "@hotwired/turbo-rails"
-import "@rails/ujs"
 import "controllers"
 import * as ActiveStorage from "@rails/activestorage"
+
 ActiveStorage.start()
 
 function initFilterToggle() {
@@ -10,16 +12,14 @@ function initFilterToggle() {
 
     if (!toggleBtn || !panel) return
 
-    if (toggleBtn.dataset.initialized) return
-    toggleBtn.dataset.initialized = true
+    if (toggleBtn.dataset.initialized === "true") return
+    toggleBtn.dataset.initialized = "true"
 
     toggleBtn.addEventListener("click", () => {
-
-        if (panel.style.display === "none" || panel.style.display === "") {
-            panel.style.display = "block"
-        } else {
-            panel.style.display = "none"
-        }
+        panel.style.display =
+            panel.style.display === "none" || panel.style.display === ""
+                ? "block"
+                : "none"
     })
 }
 
