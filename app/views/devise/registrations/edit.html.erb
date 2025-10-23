@@ -23,13 +23,14 @@
       <%= f.label :avatar, "Foto de Perfil", class: "form-label" %>
 
       <div class="avatar-preview">
-        <% if resource.avatar.attached? %>
+        <% if resource.avatar.attached? && resource.persisted? && !resource.avatar.blob&.new_record? %>
           <%= image_tag url_for(resource.avatar), class: "avatar-thumb", alt: "Sua foto atual" %>
 
           <!-- Botão de remover avatar -->
           <div class="remove-avatar">
             <%= f.hidden_field :remove_avatar, value: "false", id: "remove_avatar_field" %>
-            <button type="button" class="button btn-remove-avatar" onclick="document.getElementById('remove_avatar_field').value='true'; this.form.submit();">
+            <button type="button" class="button btn-remove-avatar"
+                    onclick="document.getElementById('remove_avatar_field').value='true'; this.form.submit();">
               Remover foto
             </button>
           </div>
@@ -69,4 +70,3 @@
 
   <% end %>
 </div>
-
