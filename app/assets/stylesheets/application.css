@@ -309,7 +309,7 @@ footer {
     /* fonte menor */
     padding: 0.4rem 0.8rem;
     /* padding reduzido */
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     /* permite encolher se necessário */
 }
 
@@ -546,4 +546,188 @@ footer {
     gap: 0.8rem;
     justify-content: flex-start;
     flex-wrap: wrap;
+}
+
+/* =======================================================
+   FORMULÁRIOS DE USUÁRIO — TEMA ESCURO MODERNO
+   Autor: Isabella (Full Stack)
+======================================================= */
+
+/* Container principal */
+.form-container {
+    background-color: #1c1c1e;
+    border: 1px solid #2a2a2d;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 480px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Título do formulário */
+.form-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #09f;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Form groups e labels */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #ccc;
+}
+
+/* Inputs */
+.form-control,
+.form-control-file {
+    width: 100%;
+    background-color: #161618;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    color: #eee;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-control-file:focus {
+    outline: none;
+    border-color: #09f;
+    background-color: #2a2a2d;
+}
+
+/* Dica/hint */
+.hint {
+    font-size: 0.85rem;
+    color: #777;
+    display: block;
+    margin-top: 0.2rem;
+}
+
+/* Avatar */
+.avatar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.avatar-preview {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar-thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #09f;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar-thumb:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.4);
+}
+
+.btn-remove-avatar {
+    background: linear-gradient(135deg, #d11a2a, #a50f1d);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-remove-avatar:hover {
+    background: linear-gradient(135deg, #e03b49, #c01d2d);
+}
+
+/* Botões de ação do formulário */
+.form-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #007bff, #0062cc);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #339aff, #007bff);
+}
+
+.btn-cancel {
+    background: linear-gradient(135deg, #444, #555);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: linear-gradient(135deg, #666, #777);
+}
+
+
+/* Link secundário */
+a {
+    color: #09f;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #4cc3ff;
+}
+
+/* Responsivo */
+@media (max-width: 500px) {
+    .form-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .avatar-preview {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .avatar-thumb {
+        width: 70px;
+        height: 70px;
+    }
 }

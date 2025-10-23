@@ -1,19 +1,28 @@
-// Configure your import map in config/importmap.rb.
-// Read more: https://github.com/rails/importmap-rails
-
 import "@hotwired/turbo-rails"
+import "@rails/ujs"
 import "controllers"
-import "@rails/ujs" // <- importante para method: :delete
 
+// Função simples pra abrir/fechar o filtro
+function initFilterToggle() {
+    const toggleBtn = document.getElementById("toggle-filter")
+    const panel = document.getElementById("filter-panel")
 
-// Espera o Turbo carregar a página
-document.addEventListener("turbo:load", () => {
-    const toggleBtn = document.querySelector("#toggle-filter");
-    const panel = document.querySelector("#filter-panel");
+    if (!toggleBtn || !panel) return
 
-    if (!toggleBtn || !panel) return; // segurança
+    // Evita adicionar o listener mais de uma vez
+    if (toggleBtn.dataset.initialized) return
+    toggleBtn.dataset.initialized = true
 
     toggleBtn.addEventListener("click", () => {
-        panel.classList.toggle("active");
-    });
-});
+        // alterna visibilidade
+        if (panel.style.display === "none" || panel.style.display === "") {
+            panel.style.display = "block"
+        } else {
+            panel.style.display = "none"
+        }
+    })
+}
+
+// Roda tanto em turbo quanto em reload normal
+document.addEventListener("turbo:load", initFilterToggle)
+document.addEventListener("DOMContentLoaded", initFilterToggle)
