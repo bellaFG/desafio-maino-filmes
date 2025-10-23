@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :movies do
     resources :comments, only: [:create, :destroy, :edit, :update]
   end
-
-  # Rotas do Active Storage já estão automáticas
-  # Ex.: rails_blob_path, rails_blob_url, rails_direct_uploads_path
 
   root "movies#index"
 end

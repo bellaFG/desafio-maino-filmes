@@ -1,12 +1,10 @@
 <h2><%= t('movies.index.title') %></h2>
 
-<!-- Botão do filtro -->
 <div class="filter-toggle-container">
-  <button id="toggle-filter" class="filter-toggle-btn"><%= t('movies.index.filter') %> ▾</button>
+  <button id="toggle-filter" class="btn btn--filter"><%= t('movies.index.filter') %> ▾</button>
 </div>
 
-<!-- Painel oculto -->
-<div id="filter-panel" class="hidden filter-panel">
+<div id="filter-panel" class="filter-panel hidden">
   <%= form_with url: movies_path, method: :get, local: true, class: "filter-form" do |f| %>
     <div class="form-row">
       <div class="form-group">
@@ -25,41 +23,60 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn-filter"><%= t('movies.index.filters.apply') %></button>
+        <button type="submit" class="btn btn--filter"><%= t('movies.index.filters.apply') %></button>
       </div>
     </div>
   <% end %>
 </div>
 
 <% if user_signed_in? %>
-  <%= link_to t('movies.index.add_new'), new_movie_path, class: "add-movie-btn" %>
+  <%= link_to t('movies.index.add_new'), new_movie_path, class: "btn btn--primary" %>
 <% end %>
 
-<hr>
+<!-- Container do grid -->
+<div class="movies-grid">
+  <% @movies.each do |movie| %>
+    <div class="movie-card">
+      <h3 class="movie-card__title">
+        <%= link_to movie.title, movie_path(movie), class: "movie-link" %>
+      </h3>
 
-<% @movies.each do |movie| %>
-  <div class="movie-card">
-    <h3><%= link_to movie.title, movie_path(movie), class: "movie-title" %></h3>
+      <% if movie.poster.attached? %>
+        <div class="poster">
+          <%= image_tag poster_variant(movie.poster), class: "poster-img" %>
+        </div>
+      <% end %>
 
-    <% if movie.poster.attached? %>
-      <div class="poster mb-2">
-        <%= image_tag poster_variant(movie.poster), class: "poster-img" %>
+      <p><strong><%= t('movies.index.director') %>:</strong> <%= movie.director %> | 
+         <strong><%= t('movies.index.year') %>:</strong> <%= movie.year %></p>
+
+      <p><%= truncate(movie.synopsis, length: 150) %></p>
+
+      <p><strong><%= t('movies.index.categories') %>:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
+
+      <div class="tags">
+        <p>
+          <strong><%= t('movies.show.tags') %>:</strong>
+          <% if movie.tags.any? %>
+            <% movie.tags.each do |tag| %>
+              <span class="tag"><%= tag.name %></span>
+            <% end %>
+          <% else %>
+            <span class="tag tag--empty"><%= t('movies.show.no_tags') %></span>
+          <% end %>
+        </p>
       </div>
-    <% end %>
 
-    <p><strong><%= t('movies.index.director') %>:</strong> <%= movie.director %> | 
-       <strong><%= t('movies.index.year') %>:</strong> <%= movie.year %></p>
-    <p><%= truncate(movie.synopsis, length: 150) %></p>
-    <p><strong><%= t('movies.index.categories') %>:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
-
-    <% if user_signed_in? && movie.user == current_user %>
-      <%= link_to t('movies.index.edit'), edit_movie_path(movie), class: "button" %> |
-      <%= button_to t('movies.index.delete'), movie_path(movie), method: :delete, 
-            data: { confirm: t('movies.index.confirm_delete') }, class: "button" %>
-    <% end %>
-
-    <%= link_to t('movies.index.view_details'), movie_path(movie), class: "button" %>
-  </div>
-<% end %>
+      <div class="actions">
+        <% if user_signed_in? && movie.user == current_user %>
+          <%= link_to t('movies.index.edit'), edit_movie_path(movie), class: "btn btn--secondary" %>
+          <%= button_to t('movies.index.delete'), movie_path(movie), method: :delete, data: { confirm: t('movies.index.confirm_delete') }, class: "btn btn--danger" %>
+        <% end %>
+        <%= link_to t('movies.index.view_details'), movie_path(movie), class: "btn btn--primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <%= paginate @movies %>
+

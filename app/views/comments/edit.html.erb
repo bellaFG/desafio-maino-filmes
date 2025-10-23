@@ -1,0 +1,12 @@
+<h3><%= t('comments.edit.title') %></h3>
+
+<%= form_with(model: [@movie, @comment], local: true, class: "comment-form") do |f| %>
+  <div class="form-group">
+    <%= f.text_area :content, rows: 4, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('comments.edit.submit'), class: "btn btn--primary" %>
+    <%= link_to t('comments.edit.cancel'), @movie, class: "btn btn--secondary" %>
+  </div>
+<% end %>

@@ -1,5 +1,59 @@
 pt:
-  hello: "Olá"
+  devise:
+    sessions:
+      signed_in: "Login efetuado com sucesso."
+      signed_out: "Você saiu com sucesso."
+      new:
+        sign_in: "Entrar"
+    registrations:
+      signed_up: "Bem-vindo(a)!"
+      updated: "Conta atualizada com sucesso."
+      destroyed: "Conta apagada com sucesso."
+      confirm_remove_avatar: "Tem certeza que deseja remover sua foto de perfil?"
+      remove_avatar: "Remover foto"
+      avatar_removed: "Foto de perfil removida com sucesso."
+      no_avatar_to_remove: "Nenhuma foto para remover."
+      new:
+        sign_up: "Cadastrar-se"
+      edit:
+        edit_account: "Editar Conta"
+        cancel_account: "Cancelar Conta"
+        not_saved: "Não foi possível salvar"
+    passwords:
+      send_instructions: "Instruções de redefinição de senha enviadas por e-mail."
+      updated: "Senha alterada com sucesso."
+      edit:
+        change_password: "Alterar senha"
+      new:
+        forgot_password: "Esqueci minha senha"
+
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        email: "Email"
+        password: "Senha"
+        password_confirmation: "Confirmação da Senha"
+        current_password: "Senha Atual"
+    errors:
+      messages:
+        not_saved: "Não foi possível salvar"
+        confirmation: "não coincide com a confirmação"
+        blank: "não pode ficar em branco"
+      models:
+        user:
+          attributes:
+            name:
+              blank: "não pode ficar em branco"
+            email:
+              blank: "não pode ficar em branco"
+            password:
+              blank: "não pode ficar em branco"
+            password_confirmation:
+              blank: "não pode ficar em branco"
+              confirmation: "não coincide com a confirmação"
+            current_password:
+              blank: "não pode ficar em branco"
 
   search:
     placeholder: "Buscar..."
@@ -41,6 +95,8 @@ pt:
       confirm_delete: "Tem certeza?"
       comments: "Comentários"
       add_comment: "Adicionar comentário"
+      edit_comment: "Editar comentário"
+      delete_comment: "Apagar comentário"
       comment: "Comentar"
       login_to_comment: "Faça login para comentar."
 
@@ -53,7 +109,9 @@ pt:
       categories: "Categorias"
       tags: "Tags (separe por vírgulas)"
       poster: "Poster do Filme"
+      remove_poster: "Remover Poster"
       submit: "Salvar"
+      cancel: "Cancelar"
 
     new:
       title: "Novo Filme"
@@ -61,9 +119,37 @@ pt:
 
     edit:
       title: "Editar Filme"
+      show: "Ver Filme"
       back: "Voltar para filmes"
+
+
+  comments:
+    new:
+      title: "Novo Comentário"
+      submit: "Salvar"
+      cancel: "Cancelar"
+    edit:
+      title: "Editar Comentário"
+      submit: "Atualizar"
+      cancel: "Cancelar"
+    destroy:
+      confirm_delete: "Tem certeza que deseja apagar este comentário?"
+    flash:
+      created: "Comentário adicionado com sucesso."
+      updated: "Comentário atualizado com sucesso."
+      destroyed: "Comentário apagado com sucesso."
 
   flash:
     created: "Filme criado com sucesso."
     updated: "Filme atualizado com sucesso."
     destroyed: "Filme apagado com sucesso."
+    login_success: "Login efetuado com sucesso."
+    logout_success: "Logout efetuado com sucesso."
+    unauthorized: "Acesso não autorizado."
+
+  buttons:
+    submit: "Salvar"
+    cancel: "Cancelar"
+    edit: "Editar"
+    delete: "Apagar"
+    view_details: "Ver detalhes"
