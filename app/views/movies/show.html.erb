@@ -51,33 +51,40 @@
 <div class="comments-section">
   <h3 class="comments-title"><%= t('movies.show.comments') %></h3>
 
-  <% @movie.comments.each do |comment| %>
-    <div class="comment-card">
-      <p><strong><%= comment.user.name %>:</strong> <%= comment.content %></p>
+  <% if @comments.any? %>
+    <% @comments.each do |comment| %>
+      <div class="comment-card">
+        <p>
+          <strong>
+            <%= comment.user ? comment.user.name : comment.name.presence || t('movies.show.anonymous') %>:
+          </strong>
+          <%= comment.content %>
+        </p>
 
-      <% if comment.user == current_user %>
-        <div class="comment-actions">
-          <%= link_to t('movies.show.edit'), edit_movie_comment_path(@movie, comment), class: "btn btn--secondary" %>
-          <%= button_to t('movies.show.delete'), movie_comment_path(@movie, comment), method: :delete, data: { confirm: t('movies.show.confirm_delete') }, class: "btn btn--danger" %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <div class="add-comment">
-      <%= form_with(model: [@movie, Comment.new], local: true, class: "comment-form") do |f| %>
-        <div class="form-group">
-          <%= f.label :content, t('movies.show.add_comment'), class: "form-label" %>
-          <%= f.text_area :content, rows: 3, class: "form-control" %>
-        </div>
-        <button type="submit" class="btn btn--primary"><%= t('movies.show.comment') %></button>
-      <% end %>
-    </div>
+        <% if comment.user == current_user %>
+          <div class="comment-actions">
+            <%= link_to t('movies.show.edit'), edit_movie_comment_path(@movie, comment), class: "btn btn--secondary" %>
+            <%= button_to t('movies.show.delete'), movie_comment_path(@movie, comment), method: :delete, data: { confirm: t('movies.show.confirm_delete') }, class: "btn btn--danger" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% else %>
-    <p class="login-prompt">
-      <%= link_to t('movies.show.login_to_comment'), new_user_session_path, class: "btn btn--secondary" %>
-    </p>
+    <p><%= t('movies.show.no_comments') %></p>
   <% end %>
-</div>
 
+  <!-- =============================== -->
+  <!-- FORMULÁRIO DE NOVO COMENTÁRIO -->
+  <!-- =============================== -->
+  <div class="add-comment">
+    <%= form_with(model: [@movie, Comment.new], local: true, class: "comment-form") do |f| %>
+      <% unless user_signed_in? %>
+        <div class="form-group">
+          <%= f.label :name, t('movies.show.your_name'), class: "form-label" %>
+          <%= f.text_field :name, class: "form-control", placeholder: t('movies.show.name_placeholder') %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :content, t('movies.show.add_comment'), class: "form-label" %>
+        <%= f.text_area :content, rows: 3, class: "form-control", placeholder: t('movies.sh_

@@ -24,7 +24,9 @@ production: &production
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+git add config/database.yml
+git commit -m "Adicionar configuração de cache, queue e cable para Solid Stack (produção)"
+git push origin main
 queue:
   <<: *production
 
