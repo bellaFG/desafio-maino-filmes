@@ -20,10 +20,10 @@ test:
   host: localhost
   port: 5432
 
-production:
+production: &production
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-  cable:
-    <<: *production
+cable:
+  <<: *production
