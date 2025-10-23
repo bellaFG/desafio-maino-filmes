@@ -153,3 +153,8 @@ pt:
     edit: "Editar"
     delete: "Apagar"
     view_details: "Ver detalhes"
+    
+  views:
+    pagination:
+      previous: "← Anterior"
+      next: "Próxima →"

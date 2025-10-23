@@ -151,3 +151,8 @@ en:
     edit: "Edit"
     delete: "Delete"
     view_details: "View Details"
+
+  views:
+    pagination:
+      previous: "← Previous"
+      next: "Next →"

@@ -731,3 +731,57 @@ a:hover {
         height: 70px;
     }
 }
+
+/* ===========================
+   PAGINAÇÃO — Maino Filmes
+=========================== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+    background-color: #141414;
+    padding: 0.6rem 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+.pagination a,
+.pagination span {
+    color: #e0e0e0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Botões normais */
+.pagination a:hover {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Página atual */
+.pagination .current {
+    background-color: #ff4655;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Botões desativados */
+.pagination .disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Ícones “Anterior” e “Próximo” */
+.pagination .prev,
+.pagination .next {
+    font-weight: 600;
+}
