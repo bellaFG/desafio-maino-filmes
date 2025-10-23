@@ -1,359 +1,549 @@
-/* Reset simples */
+/* =======================================================
+   Maino Filmes — Tema Escuro Moderno
+   Autor: Isabella (Full Stack)
+   ======================================================= */
+
+/* ---------------------------
+   RESET E BASE
+--------------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+    color-scheme: dark;
 }
 
 body {
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.5;
+    background-color: #0e0e0f;
+    color: #e0e0e0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ----------------------------- */
-/* 🔹 HEADER                     */
-/* ----------------------------- */
-
-header {
-    background-color: #222;
-    color: #fff;
+/* ---------------------------
+   LAYOUT GERAL
+--------------------------- */
+header,
+footer {
+    background-color: #111;
     padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    justify-content: space-between;
 }
 
-header h1 {
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-header h1 a {
+.header__logo a {
     color: #fff;
     text-decoration: none;
+    font-weight: 600;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
 }
 
-header .header-center {
+.header__logo a:hover {
+    color: #09f;
+}
+
+.header__center {
     flex: 1;
     display: flex;
     justify-content: center;
 }
 
-header .header-right {
+.header__right {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-header nav a {
-    color: #fff;
+.nav__link {
+    color: #ccc;
     text-decoration: none;
-    margin-left: 0.5rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
 }
 
-header nav a:hover {
-    text-decoration: underline;
+.nav__link:hover {
+    color: #09f;
 }
 
-/* 🔹 Barra de busca */
-header .search-form {
-    display: flex;
-    align-items: center;
-    background-color: #333;
-    padding: 0.3rem 0.6rem;
-    border-radius: 6px;
-    gap: 0.4rem;
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #09f;
+    transition: transform 0.3s ease;
 }
 
-header .search-form input[type="text"] {
-    padding: 0.4rem 0.6rem;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    font-size: 0.9rem;
-    background-color: #fff;
-    color: #333;
-    width: 180px;
+.profile-icon:hover {
+    transform: scale(1.1);
 }
 
-header .search-form button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+.language-switch {
+    text-align: center;
+    margin: 1rem 0;
 }
-
-header .search-form button:hover {
-    background-color: #0056b3;
-}
-
-/* Responsividade */
-@media (max-width: 700px) {
-    header {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-    }
-
-    header .header-center {
-        justify-content: center;
-        margin: 0.5rem 0;
-    }
-
-    header .header-right {
-        justify-content: center;
-    }
-}
-
-/* ----------------------------- */
-/* 🔹 MAIN + RESTO DO SITE       */
-/* ----------------------------- */
 
 main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    flex: 1;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.movie-card {
-    background-color: #fff;
-    padding: 1rem;
-    margin-bottom: 1rem;
+footer {
+    color: #777;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ---------------------------
+   BOTÕES
+--------------------------- */
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, #1b1b1d, #2b2b2e);
+    transition: all 0.3s ease;
 }
 
-.movie-card h2 {
-    margin-bottom: 0.5rem;
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.movie-card p {
-    margin-bottom: 0.5rem;
+.btn--primary {
+    background: linear-gradient(135deg, #007bff, #0062cc);
 }
 
+.btn--primary:hover {
+    background: linear-gradient(135deg, #339aff, #007bff);
+}
+
+.btn--secondary {
+    background: linear-gradient(135deg, #444, #555);
+}
+
+.btn--secondary:hover {
+    background: linear-gradient(135deg, #666, #777);
+}
+
+.btn--danger {
+    background: linear-gradient(135deg, #d11a2a, #a50f1d);
+}
+
+.btn--danger:hover {
+    background: linear-gradient(135deg, #e03b49, #c01d2d);
+}
+
+.btn--filter,
+.btn--search {
+    background: linear-gradient(135deg, #222, #333);
+    border: 1px solid #444;
+    color: #ddd;
+}
+
+.btn--filter:hover,
+.btn--search:hover {
+    background: linear-gradient(135deg, #333, #444);
+    color: #fff;
+}
+
+.btn--lang {
+    background: none;
+    border: 1px solid #444;
+    color: #aaa;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    margin: 0 0.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn--lang:hover {
+    border-color: #09f;
+    color: #09f;
+    transform: translateY(-2px);
+}
+
+/* ---------------------------
+   FORMULÁRIOS
+--------------------------- */
 .form-group {
     margin-bottom: 1rem;
 }
 
-label {
+.form-label {
     display: block;
-    margin-bottom: 0.3rem;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
-input[type="text"],
-input[type="number"],
-textarea,
-select {
+.form-control {
     width: 100%;
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #222;
-    color: #fff;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #555;
-}
-
-.notice {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.comments {
-    margin-top: 1rem;
-}
-
-.comment {
-    padding: 0.5rem;
-    border-bottom: 1px solid #eee;
-}
-
-.comment strong {
-    font-weight: bold;
-}
-
-footer {
-    text-align: center;
-    margin-top: 3rem;
-    padding: 1rem;
-    color: #777;
-}
-
-/* ----------------------------- */
-/* 🔹 Filtros e botões extras    */
-/* ----------------------------- */
-
-.filter-toggle-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-}
-
-.filter-toggle-btn {
-    background-color: #222;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
+    background-color: #1c1c1e;
+    border: 1px solid #333;
     border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+    padding: 0.6rem;
+    color: #eee;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.filter-toggle-btn:hover {
-    background-color: #444;
+.form-control:focus {
+    outline: none;
+    border-color: #09f;
+    background-color: #2a2a2d;
 }
 
-.filter-panel {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.hidden {
-    display: none;
-}
-
-.filter-form .form-row {
+.form-check {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
     gap: 1rem;
 }
 
-.filter-form .form-group {
-    flex: 1;
-    min-width: 180px;
+/* ---------------------------
+   FILMES - GRID AJUSTADO
+--------------------------- */
+
+/* Botão de adicionar filme */
+.add-movie-container {
+    margin: 30px 0 50px;
+    text-align: right;
 }
 
-.btn-filter {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
+.add-movie-container .btn {
+    padding: 10px 18px;
+    font-size: 15px;
 }
 
-.btn-filter:hover {
-    background-color: #0056b3;
+/* Grid de filmes */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
-.add-movie-btn {
-    display: inline-block;
-    background-color: #28a745;
-    color: #fff;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
+/* Card de filme */
+.movie-card {
+    background: #161618;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 0.95rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Título do filme */
+.movie-card__title a {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #09f;
+    text-decoration: none !important;
+}
+
+.movie-card__title a:hover {
+    color: #4cc3ff;
+}
+
+/* Poster do filme */
+.poster {
+    text-align: center;
     margin-bottom: 1rem;
 }
 
-.add-movie-btn:hover {
-    background-color: #218838;
-}
-
-.fade-in {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.tag-badge {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    padding: 0.2rem 0.6rem;
-    margin-right: 0.3rem;
-    margin-bottom: 0.3rem;
-    border-radius: 12px;
-    font-size: 0.85rem;
-}
-
 .poster-img {
-    max-width: 300px;
-    /* largura máxima */
-    height: auto;
-    /* mantém proporção */
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    display: block;
-    margin-bottom: 10px;
-}
-
-.movie-card {
-    margin-bottom: 30px;
-    padding: 15px;
-    background: #fff;
+    width: 200px;
+    /* maior que antes */
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
 
-.button {
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
+.poster-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.4);
+}
+
+/* Ações dentro do card (botões) */
+.movie-card .actions {
+    display: flex;
+    justify-content: center;
+    /* centraliza os botões */
+    gap: 0.8rem;
+    flex-wrap: nowrap;
+    /* impede quebra */
+}
+
+.movie-card .actions .btn {
+    min-width: 70px;
+    /* menor que antes */
+    max-width: 100%;
+    /* não ultrapassa o card */
+    height: 36px;
+    /* menor altura */
+    font-size: 0.85rem;
+    /* fonte menor */
+    padding: 0.4rem 0.8rem;
+    /* padding reduzido */
+    flex: 1 1 auto;
+    /* permite encolher se necessário */
+}
+
+
+/* ---------------------------
+   COMENTÁRIOS
+--------------------------- */
+.comments-section {
+    margin-top: 2.5rem;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 1rem;
+}
+
+.comment-card {
+    background: #1a1a1c;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 3px solid #09f;
+    transition: transform 0.2s ease;
+}
+
+.comment-card:hover {
+    transform: scale(1.01);
+}
+
+.comment-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+
+    .comment-actions,
+    .actions {
+        flex-direction: column;
+    }
+
+    .comment-actions .btn,
+    .actions .btn {
+        width: 100%;
+    }
+}
+
+/* ---------------------------
+   ALERTAS E NOTIFICAÇÕES
+--------------------------- */
+.notice,
+.alert {
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.notice {
+    background-color: rgba(0, 153, 255, 0.2);
+    border-left: 4px solid #09f;
+    color: #9cdcff;
+}
+
+.alert {
+    background-color: rgba(255, 80, 80, 0.2);
+    border-left: 4px solid #f33;
+    color: #f99;
+}
+
+/* =======================================================
+   🔎 Campo de busca (header)
+======================================================= */
+.search-form {
+    display: flex;
+    align-items: center;
+    background: #1a1a1c;
+    border: 1px solid #333;
+    border-radius: 40px;
+    overflow: hidden;
+    padding: 0.2rem 0.6rem;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+.search-form:focus-within {
+    border-color: #09f;
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
+}
+
+.search-form__input {
+    flex: 1;
+    background: transparent;
     border: none;
-    border-radius: 5px;
-    text-decoration: none;
+    color: #eee;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.search-form__input::placeholder {
+    color: #777;
+}
+
+.btn--search {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-weight: 500;
     cursor: pointer;
+    padding: 0.6rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
-.button:hover {
-    background-color: #0056b3;
+.btn--search:hover {
+    color: #09f;
+    transform: scale(1.1);
 }
 
-.tag-badge {
+/* =======================================================
+   🎛️ Filtro (index)
+======================================================= */
+.filter-toggle-container {
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.filter-panel {
+    background: #151517;
+    border: 1px solid #2a2a2c;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+}
+
+.filter-panel.active {
+    max-height: 400px;
+    opacity: 1;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.filter-form .form-group {
+    flex: 1 1 30%;
+    min-width: 220px;
+}
+
+/* =======================================================
+   TAGS DE FILME
+======================================================= */
+.tags {
+    margin-top: 1rem;
+}
+
+.tag {
     display: inline-block;
-    background-color: #eee;
-    color: #333;
-    padding: 2px 6px;
-    margin-right: 4px;
-    border-radius: 4px;
-    font-size: 0.85em;
+    background: #222;
+    color: #09f;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    margin: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: #09f;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.tag--empty {
+    color: #777;
+    background: transparent;
+    border: none;
+    font-style: italic;
+}
+
+/* ===== BOTÃO DE LOGOUT ===== */
+.btn-logout {
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0;
+    margin-left: 1rem;
+}
+
+.btn-logout:hover {
+    color: #e63946;
+    text-decoration: none;
+}
+
+.btn-logout:focus {
+    outline: none;
+}
+
+/* =======================================================
+   🔘 Padronização apenas dos botões de ação
+   (sem interferir na busca nem no filtro)
+======================================================= */
+.actions .btn,
+.comment-actions .btn,
+.movie-card .btn {
+    min-width: 100px;
+    height: 42px;
+    line-height: 1;
+    font-size: 0.95rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.7rem 1.4rem;
+}
+
+.actions,
+.comment-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }

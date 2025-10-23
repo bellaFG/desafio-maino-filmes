@@ -4,8 +4,6 @@
 
 <%= render "form", movie: @movie %>
 
-<br>
-
-<div>
-  <%= link_to t('movies.new.back'), movies_path %>
+<div class="actions">
+  <%= link_to t('movies.new.back'), movies_path, class: "btn btn--secondary" %>
 </div>

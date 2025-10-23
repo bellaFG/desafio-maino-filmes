@@ -1,5 +1,69 @@
 en:
-  hello: "Hello"
+  devise:
+    sessions:
+      signed_in: "Signed in successfully."
+      signed_out: "Signed out successfully."
+      new:
+        sign_in: "Sign In"
+    registrations:
+      signed_up: "Welcome!"
+      updated: "Account updated successfully."
+      destroyed: "Account deleted successfully."
+      confirm_remove_avatar: "Are you sure you want to remove your profile picture?"
+      remove_avatar: "Remove Picture"
+      avatar_removed: "Profile picture removed successfully."
+      no_avatar_to_remove: "No picture to remove."
+      new:
+        sign_up: "Sign Up"
+      edit:
+        edit_account: "Edit Account"
+        cancel_account: "Cancel Account"
+    passwords:
+      send_instructions: "Password reset instructions sent by email."
+      updated: "Password changed successfully."
+      edit:
+        change_password: "Change Password"
+      new:
+        forgot_password: "Forgot your password?"
+
+  activerecord:
+    attributes:
+      user:
+        name: "Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        current_password: "Current Password"
+    errors:
+      messages:
+        not_saved: "Could not save"
+        confirmation: "does not match the confirmation"
+        blank: "cannot be blank"
+      models:
+        user:
+          attributes:
+            name:
+              blank: "cannot be blank"
+            email:
+              blank: "cannot be blank"
+            password:
+              blank: "cannot be blank"
+            password_confirmation:
+              blank: "cannot be blank"
+              confirmation: "does not match the confirmation"
+            current_password:
+              blank: "cannot be blank"
+
+  search:
+    placeholder: "Search..."
+    button: "Search"
+
+  header:
+    hello: "Hello"
+    profile: "Profile"
+    logout: "Logout"
+    login: "Login"
+    register: "Sign Up"
 
   movies:
     index:
@@ -19,6 +83,19 @@ en:
         categories: "Category"
         apply: "Apply Filters"
 
+    form:
+      title: "Title"
+      synopsis: "Synopsis"
+      year: "Year"
+      duration: "Duration (minutes)"
+      director: "Director"
+      categories: "Categories"
+      tags: "Tags (separated by commas)"
+      poster: "Movie Poster"
+      remove_poster: "Remove Poster"
+      submit: "Save"
+      cancel: "Cancel"
+
     show:
       director: "Director"
       year: "Year"
@@ -29,30 +106,48 @@ en:
       delete: "Delete"
       confirm_delete: "Are you sure?"
       comments: "Comments"
-      add_comment: "Add comment"
+      add_comment: "Add Comment"
+      edit_comment: "Edit Comment"
+      delete_comment: "Delete Comment"
       comment: "Comment"
-      login_to_comment: "Login to comment."
-
-    form:
-      title: "Title"
-      synopsis: "Synopsis"
-      year: "Year"
-      duration: "Duration (minutes)"
-      director: "Director"
-      categories: "Categories"
-      tags: "Tags (comma separated)"
-      poster: "Movie Poster"
-      submit: "Save"
+      login_to_comment: "Please login to comment."
 
     new:
       title: "New Movie"
-      back: "Back to movies"
+      back: "Back to Movies"
 
     edit:
       title: "Edit Movie"
-      back: "Back to movies"
+      show: "View Movie"
+      back: "Back to Movies"
+
+  comments:
+    new:
+      title: "New Comment"
+      submit: "Save"
+      cancel: "Cancel"
+    edit:
+      title: "Edit Comment"
+      submit: "Update"
+      cancel: "Cancel"
+    destroy:
+      confirm_delete: "Are you sure you want to delete this comment?"
+    flash:
+      created: "Comment added successfully."
+      updated: "Comment updated successfully."
+      destroyed: "Comment deleted successfully."
 
   flash:
-    created: "Movie was successfully created."
-    updated: "Movie was successfully updated."
-    destroyed: "Movie was successfully deleted."
+    created: "Movie created successfully."
+    updated: "Movie updated successfully."
+    destroyed: "Movie deleted successfully."
+    login_success: "Signed in successfully."
+    logout_success: "Signed out successfully."
+    unauthorized: "Unauthorized access."
+
+  buttons:
+    submit: "Save"
+    cancel: "Cancel"
+    edit: "Edit"
+    delete: "Delete"
+    view_details: "View Details"

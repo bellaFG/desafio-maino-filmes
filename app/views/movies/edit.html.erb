@@ -1,12 +1,10 @@
-<% content_for :title, "Editing movie" %>
+<% content_for :title, t('movies.edit.title') %>
 
-<h1>Editing movie</h1>
+<h1><%= t('movies.edit.title') %></h1>
 
 <%= render "form", movie: @movie %>
 
-<br>
-
-<div>
-  <%= link_to "Show this movie", @movie %> |
-  <%= link_to "Back to movies", movies_path %>
+<div class="actions">
+  <%= link_to t('movies.edit.show'), @movie, class: "btn btn--secondary" %>
+  <%= link_to t('movies.edit.back'), movies_path, class: "btn btn--primary" %>
 </div>

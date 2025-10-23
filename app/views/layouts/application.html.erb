@@ -6,39 +6,55 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 </head>
-<body>
-  <header>
-    <h1><a href="<%= movies_path %>">Maino Filmes</a></h1>
 
-    <div class="header-center">
+<body>
+  <header class="header">
+    <h1 class="header__logo">
+      <%= link_to "Maino Filmes", movies_path, class: "header__link" %>
+    </h1>
+
+    <div class="header__center">
       <%= form_with url: movies_path, method: :get, local: true, class: "search-form" do |f| %>
-        <%= f.text_field :q, placeholder: t('search.placeholder'), value: params[:q] %>
-        <button type="submit"><%= t('search.button') %></button>
+        <%= f.text_field :q, placeholder: t('search.placeholder'), value: params[:q], class: "search-form__input" %>
+        <button type="submit" class="btn btn--search"><%= t('search.button') %></button>
       <% end %>
     </div>
 
-    <div class="header-right">
-      <nav>
+    <div class="header__right">
+      <nav class="nav">
         <% if user_signed_in? %>
-          <%= t('header.hello') %>, <%= current_user.name %> |
-          <%= link_to t('header.profile'), edit_user_registration_path %> |
-          <%= link_to t('header.logout'), destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to t('header.login'), new_user_session_path %> |
-          <%= link_to t('header.register'), new_user_registration_path %>
-        <% end %>
+          <span><%= t('header.hello') %>, <%= current_user.name.split.first %></span>
 
-      <!-- Seletor de idioma funcional -->
-      | <a href="#" onclick="window.location.href='?locale=en'; return false;">EN</a> |
-      <a href="#" onclick="window.location.href='?locale=pt'; return false;">PT</a>
+          <%= link_to edit_user_registration_path, id: "profile-link", class: "nav__profile" do %>
+            <% if current_user.avatar.attached? %>
+              <%= image_tag url_for(current_user.avatar), class: "profile-icon", alt: "Foto de Perfil" %>
+            <% else %>
+              <%= image_tag "default-user.png", class: "profile-icon", alt: "Foto de Perfil Padrão" %>
+            <% end %>
+          <% end %>
+
+          <%= button_to t('header.logout'), destroy_user_session_path, method: :delete, class: "nav__link btn-logout" %>
+        <% else %>
+          <%= link_to t('header.login'), new_user_session_path, class: "nav__link" %>
+          <%= link_to t('header.register'), new_user_registration_path, class: "nav__link" %>
+        <% end %>
       </nav>
     </div>
   </header>
 
-  <main>
+  <!-- 🌐 Troca de idioma -->
+  <div class="language-switch">
+    <%= link_to "EN", url_for(locale: :en),
+        class: "btn btn--lang #{'active' if I18n.locale == :en}" %>
+    <%= link_to "PT", url_for(locale: :pt),
+        class: "btn btn--lang #{'active' if I18n.locale == :pt}" %>
+  </div>
+
+  <main class="main">
     <% if notice %>
       <div class="notice"><%= notice %></div>
     <% end %>
@@ -49,7 +65,7 @@
     <%= yield %>
   </main>
 
-  <footer>
+  <footer class="footer">
     &copy; <%= Time.current.year %> Maino Filmes
   </footer>
 </body>

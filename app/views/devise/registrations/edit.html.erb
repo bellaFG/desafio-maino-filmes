@@ -1,34 +1,72 @@
-<h2>Edit User</h2>
+<div class="form-container">
+  <h2 class="form-title">Editar Perfil</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+               html: { method: :put, multipart: true }, class: "edit-profile-form") do |f| %>
+    
+    <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <!-- Nome -->
+    <div class="form-group">
+      <%= f.label :name, "Nome", class: "form-label" %>
+      <%= f.text_field :name, autofocus: true, class: "form-control input-name" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
+    <!-- Email -->
+    <div class="form-group">
+      <%= f.label :email, "Email", class: "form-label" %>
+      <%= f.email_field :email, class: "form-control input-email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(deixe em branco se não quiser alterar)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <!-- Avatar / Foto de Perfil -->
+    <div class="form-group avatar-group">
+      <%= f.label :avatar, "Foto de Perfil", class: "form-label" %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+      <div class="avatar-preview">
+        <% if resource.avatar.attached? %>
+          <%= image_tag url_for(resource.avatar), class: "avatar-thumb", alt: "Sua foto atual" %>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(necessário para confirmar mudanças)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+          <!-- Botão de remover avatar -->
+          <div class="remove-avatar">
+            <%= f.hidden_field :remove_avatar, value: "false", id: "remove_avatar_field" %>
+            <button type="button" class="button btn-remove-avatar" onclick="document.getElementById('remove_avatar_field').value='true'; this.form.submit();">
+              Remover foto
+            </button>
+          </div>
+        <% else %>
+          <%= image_tag "default-user.png", class: "avatar-thumb", alt: "Foto padrão" %>
+        <% end %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Atualizar" %>
-  </div>
-<% end %>
+      <%= f.file_field :avatar, accept: "image/png,image/jpeg", class: "form-control-file input-avatar" %>
+    </div>
+
+    <!-- Senha -->
+    <div class="form-group">
+      <%= f.label :password, "Nova Senha", class: "form-label" %>
+      <i class="hint">(deixe em branco se não quiser alterar)</i>
+      <%= f.password_field :password, autocomplete: "off", class: "form-control input-password" %>
+    </div>
+
+    <!-- Confirmação de senha -->
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirmação da Senha", class: "form-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-password-confirmation" %>
+    </div>
+
+    <!-- Senha atual -->
+    <div class="form-group">
+      <%= f.label :current_password, "Senha Atual", class: "form-label" %>
+      <i class="hint">(necessário para confirmar mudanças)</i>
+      <%= f.password_field :current_password, autocomplete: "off", class: "form-control input-current-password" %>
+    </div>
+
+    <!-- Ações -->
+    <div class="form-actions">
+      <%= f.submit "Atualizar", class: "button btn-submit" %>
+      <%= link_to "Cancelar", root_path, class: "button btn-cancel" %>
+    </div>
+
+  <% end %>
+</div>
+

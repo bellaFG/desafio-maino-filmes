@@ -1,31 +1,8 @@
-<div id="<%= dom_id movie %>">
-  <p>
-    <strong><%= t('movies.show.title') %>:</strong>
-    <%= movie.title %>
-  </p>
-
-  <p>
-    <strong><%= t('movies.show.synopsis') %>:</strong>
-    <%= movie.synopsis %>
-  </p>
-
-  <p>
-    <strong><%= t('movies.show.year') %>:</strong>
-    <%= movie.year %>
-  </p>
-
-  <p>
-    <strong><%= t('movies.show.duration') %>:</strong>
-    <%= movie.duration %>
-  </p>
-
-  <p>
-    <strong><%= t('movies.show.director') %>:</strong>
-    <%= movie.director %>
-  </p>
-
-  <p>
-    <strong><%= t('movies.show.user') %>:</strong>
-    <%= movie.user_id %>
-  </p>
+<div id="<%= dom_id movie %>" class="movie-card">
+  <p><strong><%= t('movies.show.title') %>:</strong> <%= movie.title %></p>
+  <p><strong><%= t('movies.show.synopsis') %>:</strong> <%= movie.synopsis %></p>
+  <p><strong><%= t('movies.show.year') %>:</strong> <%= movie.year %></p>
+  <p><strong><%= t('movies.show.duration') %>:</strong> <%= movie.duration %></p>
+  <p><strong><%= t('movies.show.director') %>:</strong> <%= movie.director %></p>
+  <p><strong><%= t('movies.show.user') %>:</strong> <%= movie.user_id %></p>
 </div>
