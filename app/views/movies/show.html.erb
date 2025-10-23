@@ -73,9 +73,6 @@
     <p><%= t('movies.show.no_comments') %></p>
   <% end %>
 
-  <!-- =============================== -->
-  <!-- FORMULÁRIO DE NOVO COMENTÁRIO -->
-  <!-- =============================== -->
   <div class="add-comment">
     <%= form_with(model: [@movie, Comment.new], local: true, class: "comment-form") do |f| %>
       <% unless user_signed_in? %>
@@ -87,4 +84,12 @@
 
       <div class="form-group">
         <%= f.label :content, t('movies.show.add_comment'), class: "form-label" %>
-        <%= f.text_area :content, rows: 3, class: "form-control", placeholder: t('movies.sh_
+        <%= f.text_area :content, rows: 3, class: "form-control", placeholder: t('movies.show.comment_placeholder') %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit t('movies.show.post_comment'), class: "btn btn--primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
