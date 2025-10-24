@@ -1,0 +1,43 @@
+<div class="page-container">
+  <h2 class="page-title">📊 Histórico de Importações</h2>
+
+  <% if @imports.any? %>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Arquivo</th>
+          <th>Status</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @imports.each do |import| %>
+          <tr>
+            <td><%= import.id %></td>
+            <td><%= import.file.filename if import.file.attached? %></td>
+            <td>
+              <% case import.status %>
+              <% when "pending" %>
+                <span class="status-badge pending">⏳ Pendente</span>
+              <% when "processing" %>
+                <span class="status-badge processing">🔄 Processando</span>
+              <% when "finished" %>
+                <span class="status-badge success">✅ Concluída</span>
+              <% when "failed" %>
+                <span class="status-badge failed">❌ Falhou</span>
+              <% end %>
+            </td>
+            <td><%= l(import.created_at, format: :short) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="empty-message">Nenhuma importação encontrada.</p>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to "Nova Importação", new_import_path, class: "btn btn-primary" %>
+  </div>
+</div>

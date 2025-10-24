@@ -70,3 +70,5 @@ gem "sidekiq"    # opcional, para importação CSV em background
 gem "kaminari", "~> 1.2"
 gem "mini_magick"
 gem "image_processing", "~> 1.2"
+gem "sidekiq"
+gem "csv"

@@ -785,3 +785,72 @@ a:hover {
 .pagination .next {
     font-weight: 600;
 }
+
+/* ======================
+   Importações (CSV)
+====================== */
+.import-form .form-group {
+    margin-bottom: 1.2rem;
+}
+
+.table-dark {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.table-dark th,
+.table-dark td {
+    border-bottom: 1px solid #333;
+    padding: 0.8rem;
+    text-align: left;
+}
+
+.table-dark th {
+    background-color: #1b1b1d;
+    font-weight: 600;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.status-badge.pending {
+    background-color: #444;
+    color: #ccc;
+}
+
+.status-badge.processing {
+    background-color: #1a73e8;
+    color: #fff;
+}
+
+.status-badge.success {
+    background-color: #00bfa6;
+    color: #fff;
+}
+
+.status-badge.failed {
+    background-color: #d93025;
+    color: #fff;
+}
+
+.form-hint {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.empty-message {
+    text-align: center;
+    margin-top: 2rem;
+    color: #999;
+}
+
+.actions {
+    margin-top: 1.5rem;
+    text-align: right;
+}

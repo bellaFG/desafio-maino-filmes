@@ -1,0 +1,29 @@
+<div class="form-container">
+  <h2 class="form-title">📦 Importar Filmes (CSV)</h2>
+
+  <%= form_with model: @import, local: true, html: { multipart: true, class: "import-form" } do |f| %>
+    <% if @import.errors.any? %>
+      <div class="alert alert-error">
+        <ul>
+          <% @import.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :file, "Selecione o arquivo CSV", class: "form-label" %>
+      <%= f.file_field :file, accept: ".csv", class: "form-control" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Iniciar Importação", class: "btn btn-primary" %>
+      <%= link_to "Voltar", imports_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+
+  <p class="form-hint">
+    O arquivo deve conter as colunas: <strong>title, director, year, duration, synopsis</strong>.
+  </p>
+</div>
