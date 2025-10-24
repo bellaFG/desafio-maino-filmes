@@ -9,9 +9,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user if user_signed_in?
 
     if @comment.save
-      redirect_to @movie, notice: "Comentário adicionado com sucesso."
+      redirect_to @movie, notice: t('comments.create.success', default: "Comentário adicionado com sucesso.")
     else
-      redirect_to @movie, alert: "Não foi possível adicionar o comentário."
+      redirect_to @movie, alert: t('comments.create.failure', default: "Não foi possível adicionar o comentário.")
     end
   end
 
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @movie, notice: "Comentário atualizado com sucesso."
+      redirect_to @movie, notice: t('comments.update.success', default: "Comentário atualizado com sucesso.")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to @movie, notice: "Comentário removido."
+    redirect_to @movie, notice: t('comments.destroy.success', default: "Comentário removido.")
   end
 
   private
@@ -41,14 +41,12 @@ class CommentsController < ApplicationController
   end
 
   def authorize_user!
-    # Só bloqueia edição/exclusão se o comentário tiver dono E o dono for outro usuário
-    if @comment.user.present? && @comment.user != current_user
-      redirect_to @movie, alert: "Você não pode alterar este comentário."
-    end
+    return unless @comment.user.present? && @comment.user != current_user
+
+    redirect_to @movie, alert: t('comments.unauthorized', default: "Você não pode alterar este comentário.")
   end
 
   def comment_params
-    # Permite nome e conteúdo mesmo se não tiver usuário associado
     params.require(:comment).permit(:content, :name)
   end
 end
