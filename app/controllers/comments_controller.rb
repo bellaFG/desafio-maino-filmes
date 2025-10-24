@@ -41,10 +41,10 @@ class CommentsController < ApplicationController
   end
 
   def authorize_user!
-    return unless @comment.user.present? && @comment.user != current_user
-
-    redirect_to @movie, alert: t('comments.unauthorized', default: "Você não pode alterar este comentário.")
+  unless @comment.user.present? && @comment.user == current_user
+    redirect_to @movie, alert: t('comments.unauthorized', default: "Você não pode alterar ou excluir este comentário.")
   end
+end
 
   def comment_params
     params.require(:comment).permit(:content, :name)
