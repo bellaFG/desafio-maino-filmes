@@ -16,6 +16,7 @@
   <%= javascript_importmap_tags %>
 </head>
 
+
 <body>
   <header class="header">
     <h1 class="header__logo">
@@ -30,31 +31,29 @@
     </div>
 
     <div class="header__right">
-      <% if user_signed_in? %>
-        <span><%= t('header.hello') %>, <%= current_user.name.split.first %></span>
+      <nav class="nav">
+        <% if user_signed_in? %>
+          <span><%= t('header.hello') %>, <%= current_user.name.split.first %></span>
 
-        <%# Foto de perfil com fallback %>
-        <%= link_to edit_user_registration_path, id: "profile-link", class: "nav__profile" do %>
-          <% if current_user.avatar.attached? %>
-            <%= image_tag url_for(current_user.avatar), class: "profile-icon", alt: "Foto de Perfil" %>
-          <% else %>
-            <%= image_tag "default-user.png", class: "profile-icon", alt: "Foto de Perfil Padrão" %>
+          <%= link_to edit_user_registration_path, id: "profile-link", class: "nav__profile" do %>
+            <% if current_user.avatar.attached? %>
+              <%= image_tag url_for(current_user.avatar), class: "profile-icon", alt: "Foto de Perfil" %>
+            <% else %>
+              <%= image_tag "default-user.png", class: "profile-icon", alt: "Foto de Perfil Padrão" %>
+            <% end %>
           <% end %>
-        <% end %>
 
-        <%= button_to t('header.logout'), destroy_user_session_path,
-            method: :delete, class: "btn-logout" %>
-      <% else %>
-        <nav class="nav">
+          <%= button_to t('header.logout'), destroy_user_session_path, method: :delete, class: "nav__link btn-logout" %>
+        <% else %>
           <%= link_to t('header.login'), new_user_session_path, class: "nav__link" %>
           <%= link_to t('header.register'), new_user_registration_path, class: "nav__link" %>
-        </nav>
-      <% end %>
+        <% end %>
+      </nav>
     </div>
   </header>
 
-  <% if (controller_name == 'movies' && action_name == 'index') || 
-        (controller_name == 'home' && action_name == 'index') %>
+  <!-- 🌐 Troca de idioma: só exibe na home e index de filmes -->
+  <% if controller_name == 'movies' && action_name == 'index' || controller_name == 'home' && action_name == 'index' %>
     <div class="language-switch">
       <%= link_to "EN", url_for(locale: :en),
           class: "btn btn--lang #{'active' if I18n.locale == :en}" %>
