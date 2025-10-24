@@ -843,111 +843,52 @@ a:hover {
     cursor: not-allowed;
 }
 
-/* FORMULÁRIO DE FILMES (ISOLADO)*/
-.movie-form {
+/* ===== AJUSTE FINO: FORMULÁRIO DE FILMES ===== */
+form[action*="movies"] {
     max-width: 720px;
     margin: 2rem auto;
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background: #111;
+    border-radius: 12px;
+    border: 1px solid #222;
 }
 
-.movie-form .form-group {
+form[action*="movies"] .form-group {
     margin-bottom: 1rem;
 }
 
-.movie-form label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-    color: #ccc;
-}
-
-.movie-form .form-control {
-    width: 100%;
-    background-color: #1a1a1a;
+form[action*="movies"] .form-control {
+    max-width: 100%;
+    background: #1a1a1a;
     border: 1px solid #333;
-    border-radius: 8px;
-    padding: 0.6rem 0.8rem;
     color: #eee;
-    font-size: 0.95rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
 }
 
-.movie-form .form-control:focus {
-    outline: none;
-    border-color: #09f;
-    box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.2);
-}
-
-/* Layout do botão de IA */
-.movie-form .title-ai-wrapper {
+form[action*="movies"] .title-ai-wrapper {
     display: flex;
     align-items: center;
     gap: 0.6rem;
 }
 
-.movie-form #fetch-movie {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+form[action*="movies"] #fetch-ai-btn {
     border: 1px solid #333;
     border-radius: 8px;
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
+    background: #222;
+    color: #e0e0e0;
     transition: background-color 0.2s ease;
 }
 
-.movie-form #fetch-movie:hover {
-    background-color: #2c2c2c;
+form[action*="movies"] #fetch-ai-btn:hover {
+    background: #2c2c2c;
 }
 
-.movie-form #fetch-movie:disabled {
-    background-color: #333;
-    color: #999;
-    cursor: not-allowed;
-}
-
-/* Checkboxes */
-.movie-form .form-check {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #ccc;
-    margin-bottom: 0.4rem;
-}
-
-/* Ações do formulário */
-.movie-form .actions {
+form[action*="movies"] .actions {
     margin-top: 1.5rem;
     display: flex;
+    justify-content: flex-end;
     gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.movie-form .actions .btn {
-    min-width: 120px;
-    height: 42px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-    .movie-form {
-        padding: 1.5rem;
-    }
-
-    .movie-form .title-ai-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .movie-form #fetch-movie {
-        width: 100%;
-    }
 }
