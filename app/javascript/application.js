@@ -1,5 +1,3 @@
-// app/javascript/application.js
-
 import "@hotwired/turbo-rails"
 import "controllers"
 import * as ActiveStorage from "@rails/activestorage"
@@ -22,3 +20,5 @@ function initFilterToggle() {
 
 document.addEventListener("turbo:load", initFilterToggle);
 document.addEventListener("DOMContentLoaded", initFilterToggle);
+
+import "./fetch_ai"
