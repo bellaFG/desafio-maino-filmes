@@ -51,8 +51,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              "sandbox.smtp.mailtrap.io",
     port:                 2525,
-    user_name:            ENV["MAILTRAP_USERNAME"],
-    password:             ENV["MAILTRAP_PASSWORD"],
+    user_name:            ENV["SMTP_USERNAME"], # <-- nome igual ao Render
+    password:             ENV["SMTP_PASSWORD"],
     authentication:       "plain",
     enable_starttls_auto: true
 }
