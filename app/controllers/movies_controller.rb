@@ -1,20 +1,20 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show fetch_movie_data]
   before_action :set_movie, only: %i[show edit update destroy]
   before_action :authorize_user!, only: %i[edit update destroy]
 
   def index
     @movies = Movie.all
 
-    # 🔍 Filtros
+    # Filtros
     @movies = @movies.where(year: params[:year]) if params[:year].present?
     @movies = @movies.joins(:categories).where(categories: { name: params[:category] }) if params[:category].present?
     @movies = @movies.where("director ILIKE ?", "%#{params[:director]}%") if params[:director].present?
 
-    # 🔎 Busca
+    # Busca
     @movies = @movies.search(params[:q]) if params[:q].present?
 
-    # 🔄 Ordenação e paginação
+    # Ordenação e paginação
     @movies = @movies.order(created_at: :desc).page(params[:page]).per(6)
   end
 
@@ -62,6 +62,17 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to movies_path, notice: t("flash.destroyed"), status: :see_other }
       format.json { head :no_content }
+    end
+  end
+
+  # Busca de dados de filme via IA
+  def fetch_movie_data
+    data = MovieAiService.fetch_data(params[:title])
+
+    if data.present?
+      render json: data
+    else
+      render json: { error: "Filme não encontrado ou erro na API" }, status: :unprocessable_entity
     end
   end
 
