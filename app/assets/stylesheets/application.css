@@ -843,3 +843,102 @@ a:hover {
     color: #999;
     cursor: not-allowed;
 }
+
+/* FORMULÁRIOS PADRONIZADOS */
+.form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #d1d1d1;
+}
+
+.form-control {
+    background-color: #1a1a1a;
+    border: 1px solid #2b2b2b;
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    width: 100%;
+    max-width: 600px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 2px rgba(111, 66, 193, 0.3);
+}
+
+/* Layout do botão de IA ao lado do título */
+.title-ai-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fetch-movie {
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.9rem;
+}
+
+/* Checkboxes */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    color: #ccc;
+}
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+.btn--primary {
+    background-color: #6f42c1;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+}
+
+.btn--primary:hover {
+    background-color: #8357d6;
+    transform: translateY(-1px);
+}
+
+.btn--secondary {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.btn--secondary:hover {
+    background-color: #3c3c3c;
+}
+
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #111;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
