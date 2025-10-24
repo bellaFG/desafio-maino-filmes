@@ -161,3 +161,7 @@ pt:
     pagination:
       previous: "← Anterior"
       next: "Próxima →"
+      gap: "…"
+      first: "Primeira"
+      last: "Última"
+    
