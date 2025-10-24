@@ -67,12 +67,26 @@ class MoviesController < ApplicationController
 
   # Busca de dados de filme via IA
   def fetch_movie_data
-    data = MovieAiService.fetch_data(params[:title])
+    title = params[:title]
 
-    if data.present?
-      render json: data
-    else
-      render json: { error: "Filme não encontrado ou erro na API" }, status: :unprocessable_entity
+    # 🧩 Validação inicial
+    if title.blank?
+      render json: { error: "Título não informado" }, status: :bad_request
+      return
+    end
+
+    begin
+      data = MovieAiService.fetch_data(title)
+
+      if data.present?
+        render json: data, status: :ok
+      else
+        render json: { error: "Filme não encontrado ou erro na API" }, status: :not_found
+      end
+
+    rescue StandardError => e
+      Rails.logger.error("❌ Erro ao buscar filme '#{title}': #{e.message}")
+      render json: { error: "Erro interno no servidor: #{e.message}" }, status: :internal_server_error
     end
   end
 
