@@ -5,16 +5,10 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-
-    # Filtros
     @movies = @movies.where(year: params[:year]) if params[:year].present?
     @movies = @movies.joins(:categories).where(categories: { name: params[:category] }) if params[:category].present?
     @movies = @movies.where("director ILIKE ?", "%#{params[:director]}%") if params[:director].present?
-
-    # Busca
     @movies = @movies.search(params[:q]) if params[:q].present?
-
-    # Ordenação e paginação
     @movies = @movies.order(created_at: :desc).page(params[:page]).per(6)
   end
 
@@ -59,34 +53,69 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy!
+
     respond_to do |format|
       format.html { redirect_to movies_path, notice: t("flash.destroyed"), status: :see_other }
       format.json { head :no_content }
     end
   end
 
-  # Busca de dados de filme via IA
   def fetch_movie_data
     title = params[:title]
-
-    # 🧩 Validação inicial
-    if title.blank?
-      render json: { error: "Título não informado" }, status: :bad_request
-      return
-    end
+    return render json: { error: "Título não informado" }, status: :bad_request if title.blank?
 
     begin
-      data = MovieAiService.fetch_data(title)
+      client = OpenAI::Client.new(api_key: ENV["OPENAI_API_KEY"])
+      available_categories = Category.pluck(:name)
 
-      if data.present?
-        render json: data, status: :ok
-      else
-        render json: { error: "Filme não encontrado ou erro na API" }, status: :not_found
+      prompt = <<~PROMPT
+        Gere informações resumidas e objetivas sobre o filme "#{title}" no formato JSON.
+        Escolha apenas uma categoria entre as disponíveis abaixo.
+        Se nenhuma se encaixar, use "Outros".
+        Também gere uma lista de até 10 tags curtas iniciando cada uma com letra maiúscula relacionadas ao filme (temas, estilos, palavras-chave).
+
+        Categorias disponíveis: #{available_categories.join(", ")}
+
+        Retorne exatamente neste formato JSON:
+        {
+          "title": "",
+          "synopsis": "",
+          "year": number,
+          "duration": number,
+          "director": "",
+          "category": "",
+          "tags": ["", "", "", "", "", "", "", "", "", ""]
+        }
+      PROMPT
+
+      response = client.chat.completions.create(
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.3
+      )
+
+      puts "🔍 OPENAI RESPONSE: #{response.inspect}"
+
+      content = response.choices[0].message[:content]
+      cleaned = content.gsub(/```json/i, "").gsub(/```/, "").strip
+      data = JSON.parse(cleaned) rescue {}
+
+      puts "📊 PARSED DATA: #{data.inspect}"
+
+      unless available_categories.include?(data["category"])
+        data["category"] = "Outros"
       end
 
-    rescue StandardError => e
-      Rails.logger.error("❌ Erro ao buscar filme '#{title}': #{e.message}")
-      render json: { error: "Erro interno no servidor: #{e.message}" }, status: :internal_server_error
+      data["tags"] ||= []
+
+      if data["title"].blank?
+        render json: { error: "IA não retornou dados válidos." }, status: :unprocessable_entity
+      else
+        render json: data
+      end
+    rescue => e
+      puts "💥 ERRO IA: #{e.full_message}"
+      render json: { error: "Erro na integração com a IA: #{e.message}" }, status: :internal_server_error
     end
   end
 
@@ -101,9 +130,7 @@ class MoviesController < ApplicationController
   end
 
   def movie_params
-    params.require(:movie).permit(
-      :title, :synopsis, :year, :duration, :director, :poster, :remove_poster, category_ids: []
-    )
+    params.require(:movie).permit(:title, :synopsis, :year, :duration, :director, :poster, :remove_poster, category_ids: [])
   end
 
   def assign_tags

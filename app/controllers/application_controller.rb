@@ -1,11 +1,8 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
-  # Permite enviar os campos :name e :avatar nos formulários do Devise
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # 🌐 Internacionalização: define o idioma com base no parâmetro de URL
   before_action :set_locale
 
   protected
@@ -22,9 +19,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
   end
 
-  # Mantém o locale em todos os links do app
   def default_url_options
     { locale: I18n.locale }
   end
 end
-

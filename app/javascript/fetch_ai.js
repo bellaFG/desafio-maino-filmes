@@ -1,13 +1,9 @@
-// app/javascript/fetch_ai.js
-
-// ✅ Garante que só roda quando o DOM está pronto com Turbo
-document.addEventListener("turbo:load", () => {
-    console.log("🤖 fetch_ai.js carregado com sucesso!");
+function initFetchAI() {
+    console.log("🤖 fetch_ai.js inicializado!");
 
     const fetchBtn = document.getElementById("fetch-ai-btn");
     if (!fetchBtn) return;
 
-    // evita múltiplos listeners
     if (fetchBtn.dataset.aiInitialized === "true") return;
     fetchBtn.dataset.aiInitialized = "true";
 
@@ -17,6 +13,10 @@ document.addEventListener("turbo:load", () => {
             alert("Digite um título antes de buscar!");
             return;
         }
+
+        fetchBtn.disabled = true;
+        const originalText = fetchBtn.textContent;
+        fetchBtn.textContent = "🤖 Buscando...";
 
         try {
             const response = await fetch(
@@ -29,28 +29,69 @@ document.addEventListener("turbo:load", () => {
             }
 
             const data = await response.json();
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
 
-            // Preenche os campos automaticamente se existirem
             const map = {
+                title: "movie_title",
                 synopsis: "movie_synopsis",
                 year: "movie_year",
                 duration: "movie_duration",
                 director: "movie_director",
-                categories: "movie_categories",
-                tags: "movie_tags",
             };
-
             Object.entries(map).forEach(([key, id]) => {
                 const field = document.getElementById(id);
-                if (field) field.value = data[key] || "";
+                if (field && data[key]) field.value = data[key];
             });
 
-            console.log("✅ Dados preenchidos automaticamente com sucesso!");
+            if (data.category) {
+                const checkboxes = document.querySelectorAll(
+                    "input[name='movie[category_ids][]']"
+                );
+
+                let matched = false;
+                checkboxes.forEach((cb) => {
+                    const label = cb.parentElement.textContent.trim().toLowerCase();
+                    if (label === data.category.trim().toLowerCase()) {
+                        cb.checked = true;
+                        matched = true;
+                    } else {
+                        cb.checked = false;
+                    }
+                });
+
+                if (!matched) {
+                    const outros = Array.from(checkboxes).find((cb) =>
+                        cb.parentElement.textContent
+                            .trim()
+                            .toLowerCase()
+                            .includes("outros")
+                    );
+                    if (outros) outros.checked = true;
+                }
+            }
+
+            if (Array.isArray(data.tags) && data.tags.length > 0) {
+                const tagInput = document.getElementById("movie_tags");
+                if (tagInput) {
+                    tagInput.value = data.tags.join(", ");
+                }
+            }
+
+            console.log("Dados da IA aplicados com sucesso!", data);
         } catch (error) {
-            console.error("💥 Erro ao buscar dados da IA:", error);
-            //   alert("Ocorreu um erro ao buscar dados da IA 😥");
+            console.error("Erro ao buscar dados da IA:", error);
+            alert("Ocorreu um erro ao buscar dados da IA : " + error.message);
+        } finally {
+            fetchBtn.disabled = false;
+            fetchBtn.textContent = originalText;
         }
     });
-});
+}
 
-export { }
+document.addEventListener("turbo:load", initFetchAI);
+document.addEventListener("DOMContentLoaded", initFetchAI);
+
+export { };

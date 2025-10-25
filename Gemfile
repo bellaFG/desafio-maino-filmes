@@ -64,12 +64,11 @@ end
 
 gem "devise"
 gem "pagy"
-gem "pundit"     # opcional, para autorização
-gem "sidekiq"    # opcional, para importação CSV em background
-
+gem "pundit"
 gem "kaminari", "~> 1.2"
 gem "mini_magick"
 gem "image_processing", "~> 1.2"
 gem "sidekiq"
 gem "csv"
 gem "dotenv-rails", groups: [ :development, :test ]
+gem "openai"
