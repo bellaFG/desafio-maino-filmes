@@ -1,6 +1,16 @@
 <div class="form-container">
   <h2 class="form-title">Cadastrar</h2>
 
+  <% if resource.errors.any? %>
+    <div class="alert">
+      <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true, class: "registration-form", data: { turbo: false }) do |f| %>
     <div class="form-group">
       <%= f.label :name, "Nome", class: "form-label" %>
