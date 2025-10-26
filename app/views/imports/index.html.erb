@@ -11,11 +11,22 @@
           <th>Data</th>
         </tr>
       </thead>
+
       <tbody>
         <% @imports.each do |import| %>
           <tr>
             <td><%= import.id %></td>
-            <td><%= import.file.filename if import.file.attached? %></td>
+
+            <td>
+              <% if import.file.attached? %>
+                <%= link_to import.file.filename, url_for(import.file),
+                            target: "_blank",
+                            class: "file-link" %>
+              <% else %>
+                <span class="text-muted">Nenhum arquivo</span>
+              <% end %>
+            </td>
+
             <td>
               <% case import.status %>
               <% when "pending" %>
@@ -28,6 +39,7 @@
                 <span class="status-badge failed">❌ Falhou</span>
               <% end %>
             </td>
+
             <td><%= l(import.created_at, format: :short) %></td>
           </tr>
         <% end %>
@@ -38,6 +50,6 @@
   <% end %>
 
   <div class="actions">
-    <%= link_to "Nova Importação", new_import_path, class: "btn btn-primary" %>
+    <%= link_to "➕ Nova Importação", new_import_path, class: "btn btn-primary" %>
   </div>
 </div>

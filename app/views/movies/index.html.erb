@@ -30,8 +30,12 @@
 </div>
 
 <% if user_signed_in? %>
-  <%= link_to t('movies.index.add_new'), new_movie_path, class: "btn btn--primary" %>
+  <div class="actions-bar">
+    <%= link_to t('movies.index.add_new'), new_movie_path, class: "btn btn--primary" %>
+    <%= link_to t('movies.index.add_new_import'), new_import_path, class: "btn btn--primary" %>
+  </div>
 <% end %>
+
 
 <div class="movies-grid">
   <% @movies.each do |movie| %>

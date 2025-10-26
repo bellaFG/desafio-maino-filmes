@@ -70,6 +70,7 @@ en:
       title: "Movies"
       filter: "Filter"
       add_new: "Add New Movie"
+      add_new_import: "Import Movies"
       director: "Director"
       year: "Year"
       categories: "Categories"

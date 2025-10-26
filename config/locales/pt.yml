@@ -71,6 +71,7 @@ pt:
       title: "Filmes"
       filter: "Filtro"
       add_new: "Adicionar Novo Filme"
+      add_new_import: "Importar Filmes"
       director: "Diretor"
       year: "Ano"
       categories: "Categorias"

@@ -1,7 +1,7 @@
 <div class="form-container">
   <h2 class="form-title">📦 Importar Filmes (CSV)</h2>
 
-  <%= form_with model: @import, local: true, html: { multipart: true, class: "import-form" } do |f| %>
+  <%= form_with model: @import, local: true, html: { multipart: true, class: "import-form" }, data: { turbo: false } do |f| %>
     <% if @import.errors.any? %>
       <div class="alert alert-error">
         <ul>
@@ -19,7 +19,7 @@
 
     <div class="form-actions">
       <%= f.submit "Iniciar Importação", class: "btn btn-primary" %>
-      <%= link_to "Voltar", imports_path, class: "btn btn-secondary" %>
+      <%= link_to "Histórico de Importações", imports_path, class: "btn btn-secondary" %>
     </div>
   <% end %>
 
