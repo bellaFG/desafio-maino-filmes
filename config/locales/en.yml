@@ -109,6 +109,9 @@ en:
       submit: "Save"
       cancel: "Cancel"
       fetch_ai: "Fill data with AI"
+      add_category: "Add new category"
+      add_category_placeholder: "Type category name"
+      add_category_button: "Add"
 
     show:
       title: "Title"

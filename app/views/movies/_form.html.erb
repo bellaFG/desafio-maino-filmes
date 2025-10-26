@@ -31,12 +31,20 @@
 
   <div class="form-group">
     <%= f.label :categories, t('movies.form.categories') %>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
-      <div class="form-check">
-        <%= cb.check_box(class: "form-check-input") %>
-        <%= cb.text %>
-      </div>
-    <% end %>
+    <div id="categories-list">
+      <% Category.all.each do |category| %>
+        <div class="form-check" data-category-id="<%= category.id %>">
+          <%= check_box_tag "movie[category_ids][]", category.id, @movie.category_ids.include?(category.id), class: "form-check-input" %>
+          <%= category.name %>
+          <button type="button" class="btn-remove-category" title="Remover" style="margin-left:8px;">✕</button>
+        </div>
+      <% end %>
+    </div>
+    <div class="new-category-wrapper" style="margin-top: 0.7rem; display: flex; gap: 0.5rem;">
+      <%= label_tag :new_category, t('movies.form.add_category') %>
+      <%= text_field_tag :new_category, nil, class: "form-control", placeholder: t('movies.form.add_category_placeholder'), autocomplete: "off", id: "new_category_input" %>
+      <button type="button" id="add-category-btn" class="btn btn--primary"><%= t('movies.form.add_category_button') %></button>
+    </div>
   </div>
 
   <div class="form-group">
@@ -63,3 +71,119 @@
     <%= f.submit t('movies.form.submit'), class: "btn btn--primary" %>
   </div>
 <% end %>
+
+<script>
+function setupCategoryForm() {
+  var input = document.querySelector('input[name="new_category"]');
+  var btn = document.getElementById('add-category-btn');
+  var categoriesList = document.getElementById('categories-list');
+
+  if (input) {
+    input.onkeydown = null;
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // impede o envio do form
+        addCategory(); // chama a função normalmente
+      }
+    });
+  }
+
+  async function addCategory() {
+    var name = input.value.trim();
+    if (!name) return;
+    btn.disabled = true;
+    input.disabled = true;
+    var locale = (window.location.pathname.match(/^\/(pt|en)\b/) || [])[1] || 'pt';
+    var endpoint = "/" + locale + "/categories";
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ category: { name: name } })
+      });
+      const data = await response.json();
+      if (data.id) {
+        // Verifica se já existe na lista antes de adicionar
+        if (!categoriesList.querySelector('[data-category-id="' + data.id + '"]')) {
+          var newDiv = document.createElement('div');
+          newDiv.className = "form-check";
+          newDiv.setAttribute("data-category-id", data.id);
+          var checkbox = document.createElement('input');
+          checkbox.type = "checkbox";
+          checkbox.name = "movie[category_ids][]";
+          checkbox.value = data.id;
+          checkbox.checked = true;
+          checkbox.className = "form-check-input";
+          var label = document.createElement('label');
+          label.textContent = data.name;
+          var removeBtn = document.createElement('button');
+          removeBtn.type = "button";
+          removeBtn.className = "btn-remove-category";
+          removeBtn.title = "Remover";
+          removeBtn.style.marginLeft = "8px";
+          removeBtn.textContent = "✕";
+          removeBtn.onclick = function(e) {
+            e.preventDefault();
+            removeCategory(data.id, newDiv);
+          };
+          newDiv.appendChild(checkbox);
+          newDiv.appendChild(label);
+          newDiv.appendChild(removeBtn);
+          categoriesList.appendChild(newDiv);
+        }
+        input.value = "";
+      } else if (data.error) {
+        alert(data.error);
+      }
+    } catch {
+      alert("Erro ao criar categoria");
+    } finally {
+      btn.disabled = false;
+      input.disabled = false;
+    }
+  }
+
+  if (btn) {
+    btn.onclick = null;
+    btn.onclick = function(e) {
+      e.preventDefault();
+      addCategory();
+    };
+  }
+
+  function removeCategory(categoryId, element) {
+    if (!confirm("Tem certeza que deseja remover esta categoria?")) return;
+    var locale = (window.location.pathname.match(/^\/(pt|en)\b/) || [])[1] || 'pt';
+    var endpoint = "/" + locale + "/categories/" + categoryId;
+    fetch(endpoint, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        element.remove();
+      } else {
+        response.json().then(data => alert(data.error || "Erro ao remover categoria"));
+      }
+    })
+    .catch(() => alert("Erro ao remover categoria"));
+  }
+
+  categoriesList.querySelectorAll(".btn-remove-category").forEach(function(btn) {
+    btn.onclick = null;
+    btn.onclick = function(e) {
+      e.preventDefault();
+      var parent = btn.closest(".form-check");
+      var categoryId = parent.getAttribute("data-category-id");
+      removeCategory(categoryId, parent);
+    };
+  });
+}
+
+document.addEventListener("turbo:load", setupCategoryForm);
+</script>

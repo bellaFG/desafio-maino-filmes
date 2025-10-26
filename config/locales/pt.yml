@@ -137,6 +137,9 @@ pt:
       submit: "Salvar"
       cancel: "Cancelar"
       fetch_ai: "Preencher dados com IA"
+      add_category: "Adicionar nova categoria"
+      add_category_placeholder: "Digite o nome da categoria"
+      add_category_button: "Adicionar"
 
     new:
       title: "Novo Filme"
