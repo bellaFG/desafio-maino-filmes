@@ -425,6 +425,9 @@ DEPENDENCIES
   puma (>= 5.0)
   pundit
   rails (~> 8.1.0)
+  rubocop (~> 1.81)
+  rubocop-performance (~> 1.26)
+  rubocop-rails (~> 2.33)
   rubocop-rails-omakase
   selenium-webdriver
   sidekiq

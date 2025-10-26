@@ -10,7 +10,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create comment" do
     assert_difference("Comment.count") do
-      post movie_comments_url(@movie, locale: :en), params: { 
+      post movie_comments_url(@movie, locale: :en), params: {
         comment: { content: "Test comment" }
       }
     end

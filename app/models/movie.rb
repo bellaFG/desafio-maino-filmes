@@ -20,7 +20,7 @@ class Movie < ApplicationRecord
   # ----- REMOÇÃO DE POSTER -----
   attr_accessor :remove_poster  # cria o atributo temporário para o checkbox
 
-  before_save :purge_poster, if: -> { remove_poster == '1' } # remove poster se checkbox marcado
+  before_save :purge_poster, if: -> { remove_poster == "1" } # remove poster se checkbox marcado
 
   private
 

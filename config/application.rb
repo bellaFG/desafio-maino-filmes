@@ -12,7 +12,7 @@ module MainoFilmes
     config.load_defaults 8.0
 
     # 🌐 I18n: internacionalização
-    config.i18n.available_locales = [:pt, :en]
+    config.i18n.available_locales = [ :pt, :en ]
     config.i18n.default_locale = :pt
 
     # 📁 Ignorar subpastas de lib que não precisam de reload

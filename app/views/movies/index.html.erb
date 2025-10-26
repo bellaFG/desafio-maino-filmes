@@ -17,14 +17,16 @@
         <%= f.label :director, t('movies.index.filters.director') %>
         <%= f.text_field :director, value: params[:director], class: "form-control" %>
       </div>
-      
+
       <div class="form-group">
         <%= f.label :categories, t('movies.index.filters.categories') %>
         <%= f.text_field :categories, value: params[:categories], class: "form-control" %>
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn--filter"><%= t('movies.index.filters.apply') %></button>
+        <button type="submit" class="btn btn--filter">
+          <%= t('movies.index.filters.apply') %>
+        </button>
       </div>
     </div>
   <% end %>
@@ -36,7 +38,6 @@
     <%= link_to t('movies.index.add_new_import'), new_import_path, class: "btn btn--primary" %>
   </div>
 <% end %>
-
 
 <div class="movies-grid">
   <% @movies.each do |movie| %>
@@ -51,12 +52,17 @@
         </div>
       <% end %>
 
-      <p><strong><%= t('movies.index.director') %>:</strong> <%= movie.director %> | 
-         <strong><%= t('movies.index.year') %>:</strong> <%= movie.year %></p>
+      <p>
+        <strong><%= t('movies.index.director') %>:</strong> <%= movie.director %> |
+        <strong><%= t('movies.index.year') %>:</strong> <%= movie.year %>
+      </p>
 
       <p><%= truncate(movie.synopsis, length: 150) %></p>
 
-      <p><strong><%= t('movies.index.categories') %>:</strong> <%= movie.categories.map(&:name).join(", ") %></p>
+      <p>
+        <strong><%= t('movies.index.categories') %>:</strong>
+        <%= movie.categories.map(&:name).join(", ") %>
+      </p>
 
       <div class="tags">
         <p>
@@ -85,4 +91,3 @@
 <div class="pagination-container">
   <%= paginate @movies %>
 </div>
-

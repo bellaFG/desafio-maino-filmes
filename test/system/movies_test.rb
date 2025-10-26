@@ -33,7 +33,7 @@ class MoviesTest < ApplicationSystemTestCase
     fill_in Movie.human_attribute_name("year"), with: 2024
     fill_in Movie.human_attribute_name("duration"), with: 130
     fill_in Movie.human_attribute_name("synopsis"), with: "New synopsis"
-    
+
     click_on I18n.t("helpers.submit.create")
 
     assert_text I18n.t("movies.notices.created")

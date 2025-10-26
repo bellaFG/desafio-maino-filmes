@@ -3,7 +3,6 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
                html: { method: :put, multipart: true }, class: "edit-profile-form") do |f| %>
-    
     <%= devise_error_messages! %>
 
     <!-- Nome -->
@@ -29,8 +28,11 @@
           <!-- Botão de remover avatar -->
           <div class="remove-avatar">
             <%= f.hidden_field :remove_avatar, value: "false", id: "remove_avatar_field" %>
-            <button type="button" class="button btn-remove-avatar"
-                    onclick="document.getElementById('remove_avatar_field').value='true'; this.form.submit();">
+            <button
+              type="button"
+              class="button btn-remove-avatar"
+              onclick="document.getElementById('remove_avatar_field').value='true'; this.form.submit();"
+            >
               <%= t('devise.registrations.edit.remove_avatar') %>
             </button>
           </div>
@@ -67,6 +69,5 @@
       <%= f.submit t('devise.registrations.edit.update'), class: "button btn-submit" %>
       <%= link_to t('devise.registrations.edit.cancel'), root_path, class: "button btn-cancel" %>
     </div>
-
   <% end %>
 </div>

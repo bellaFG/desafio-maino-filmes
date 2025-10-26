@@ -1,17 +1,17 @@
 class CommentsController < ApplicationController
   before_action :set_movie
-  before_action :set_comment, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :set_comment, only: [ :edit, :update, :destroy ]
+  before_action :authenticate_user!, only: [ :edit, :update, :destroy ]
+  before_action :authorize_user!, only: [ :edit, :update, :destroy ]
 
   def create
     @comment = @movie.comments.build(comment_params)
     @comment.user = current_user if user_signed_in?
 
     if @comment.save
-      redirect_to @movie, notice: t('comments.create.success', default: "Comentário adicionado com sucesso.")
+      redirect_to @movie, notice: t("comments.create.success", default: "Comentário adicionado com sucesso.")
     else
-      redirect_to @movie, alert: t('comments.create.failure', default: "Não foi possível adicionar o comentário.")
+      redirect_to @movie, alert: t("comments.create.failure", default: "Não foi possível adicionar o comentário.")
     end
   end
 
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @movie, notice: t('comments.update.success', default: "Comentário atualizado com sucesso.")
+      redirect_to @movie, notice: t("comments.update.success", default: "Comentário atualizado com sucesso.")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to @movie, notice: t('comments.destroy.success', default: "Comentário removido.")
+    redirect_to @movie, notice: t("comments.destroy.success", default: "Comentário removido.")
   end
 
   private
@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
 
   def authorize_user!
   unless @comment.user.present? && @comment.user == current_user
-    redirect_to @movie, alert: t('comments.unauthorized', default: "Você não pode alterar ou excluir este comentário.")
+    redirect_to @movie, alert: t("comments.unauthorized", default: "Você não pode alterar ou excluir este comentário.")
   end
 end
 

@@ -19,9 +19,11 @@
 
             <td>
               <% if import.file.attached? %>
-                <%= link_to import.file.filename, url_for(import.file),
-                            target: "_blank",
-                            class: "file-link" %>
+                <%=
+                  link_to import.file.filename, url_for(import.file),
+                  target: "_blank",
+                  class: "file-link"
+                %>
               <% else %>
                 <span class="text-muted"><%= t('imports.no_file') %></span>
               <% end %>
@@ -32,7 +34,9 @@
               <% when "pending" %>
                 <span class="status-badge pending"><%= t('imports.status_labels.pending') %></span>
               <% when "processing" %>
-                <span class="status-badge processing"><%= t('imports.status_labels.processing') %></span>
+                <span
+                  class="status-badge processing"
+                ><%= t('imports.status_labels.processing') %></span>
               <% when "finished" %>
                 <span class="status-badge success"><%= t('imports.status_labels.finished') %></span>
               <% when "failed" %>

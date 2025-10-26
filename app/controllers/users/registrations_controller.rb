@@ -1,6 +1,6 @@
 # app/controllers/users/registrations_controller.rb
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [ :update ]
 
   # PUT /resource
   def update
@@ -17,6 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Permite nome e avatar no update (Devise precisa disso)
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :avatar ])
   end
 end

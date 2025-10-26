@@ -8,9 +8,9 @@ class ImportTest < ActiveSupport::TestCase
       status: :pending
     )
     @import.file.attach(
-      io: File.open(Rails.root.join('test/fixtures/files/test.csv')),
-      filename: 'test.csv',
-      content_type: 'text/csv'
+      io: File.open(Rails.root.join("test/fixtures/files/test.csv")),
+      filename: "test.csv",
+      content_type: "text/csv"
     )
   end
 
@@ -37,7 +37,7 @@ class ImportTest < ActiveSupport::TestCase
   end
 
   test "should have valid status transitions" do
-    valid_statuses = ['pending', 'processing', 'finished', 'failed']
+    valid_statuses = [ "pending", "processing", "finished", "failed" ]
     valid_statuses.each do |status|
       @import.status = status
       assert @import.valid?, "#{status} should be a valid status"

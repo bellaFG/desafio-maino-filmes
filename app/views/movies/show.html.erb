@@ -1,4 +1,4 @@
-<div class="movie-card"> 
+<div class="movie-card">
   <div class="movie-header">
     <h2 class="movie-title"><%= @movie.title %></h2>
   </div>
@@ -12,9 +12,15 @@
 
     <div class="movie-info">
       <div class="details">
-        <p><strong><%= t('movies.show.director') %>:</strong> <%= @movie.director %></p>
-        <p><strong><%= t('movies.show.year') %>:</strong> <%= @movie.year %></p>
-        <p><strong><%= t('movies.show.duration') %>:</strong> <%= @movie.duration %> min</p>
+        <p>
+          <strong><%= t('movies.show.director') %>:</strong> <%= @movie.director %>
+        </p>
+        <p>
+          <strong><%= t('movies.show.year') %>:</strong> <%= @movie.year %>
+        </p>
+        <p>
+          <strong><%= t('movies.show.duration') %>:</strong> <%= @movie.duration %> min
+        </p>
       </div>
 
       <div class="synopsis">
@@ -22,7 +28,10 @@
       </div>
 
       <div class="categories">
-        <p><strong><%= t('movies.show.categories') %>:</strong> <%= @movie.categories.pluck(:name).join(", ") %></p>
+        <p>
+          <strong><%= t('movies.show.categories') %>:</strong>
+          <%= @movie.categories.pluck(:name).join(", ") %>
+        </p>
       </div>
 
       <div class="tags">

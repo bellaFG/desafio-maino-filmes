@@ -9,7 +9,7 @@ Rails.application.configure do
   # Cache e logs
   config.action_controller.perform_caching = true
   config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
-  config.log_tags = [:request_id]
+  config.log_tags = [ :request_id ]
   config.logger = ActiveSupport::TaggedLogging.logger(STDOUT)
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
   config.silence_healthcheck_path = "/up"
@@ -28,7 +28,7 @@ Rails.application.configure do
   config.force_ssl = true
 
   config.session_store :cookie_store,
-                       key: '_maino_filmes_session',
+                       key: "_maino_filmes_session",
                        secure: true,
                        same_site: :none
 
@@ -43,7 +43,7 @@ Rails.application.configure do
 
   # 📦 Banco de dados
   config.active_record.dump_schema_after_migration = false
-  config.active_record.attributes_for_inspect = [:id]
+  config.active_record.attributes_for_inspect = [ :id ]
 
   # 📧 Configuração do Action Mailer (usando Mailtrap)
   config.action_mailer.default_url_options = { host: "desafio-maino-filmes.onrender.com", protocol: "https" }
@@ -51,7 +51,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              "sandbox.smtp.mailtrap.io",
     port:                 2525,
-    user_name:            ENV["SMTP_USERNAME"], 
+    user_name:            ENV["SMTP_USERNAME"],
     password:             ENV["SMTP_PASSWORD"],
     authentication:       "plain",
     enable_starttls_auto: true

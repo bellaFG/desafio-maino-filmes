@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :avatar])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :name, :avatar ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :avatar ])
   end
 
   def default_url_options
     { locale: I18n.locale }
   end
-  
+
   private
 
   def set_locale
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def locale_from_browser
-    accept_lang = request.env['HTTP_ACCEPT_LANGUAGE']
+    accept_lang = request.env["HTTP_ACCEPT_LANGUAGE"]
     return nil unless accept_lang
 
     browser_locale = accept_lang.scan(/^[a-z]{2}/).first&.to_sym
@@ -51,12 +51,12 @@ class ApplicationController < ActionController::Base
     cookies[:locale] = {
       value: locale,
       expires: 1.year.from_now,
-      path: '/'
+      path: "/"
     }
   end
 
   def redirect_to_locale
-    if request.path == '/' || request.path == '/en' || request.path == '/pt'
+    if request.path == "/" || request.path == "/en" || request.path == "/pt"
       redirect_to movies_path(locale: extract_locale)
     elsif !params[:locale].present?
       redirect_to "/#{extract_locale}#{request.path}", allow_other_host: true

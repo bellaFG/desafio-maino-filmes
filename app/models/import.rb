@@ -6,9 +6,9 @@ class Import < ApplicationRecord
   validates :status, presence: true
 
   enum :status, {
-    pending: 'pending',
-    processing: 'processing',
-    finished: 'finished',
-    failed: 'failed'
-  }, default: 'pending'
+    pending: "pending",
+    processing: "processing",
+    finished: "finished",
+    failed: "failed"
+  }, default: "pending"
 end

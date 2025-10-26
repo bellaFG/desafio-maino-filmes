@@ -50,7 +50,7 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
 end
 
 group :development do
@@ -74,3 +74,7 @@ gem "sidekiq"
 gem "csv"
 gem "dotenv-rails", groups: [ :development, :test ]
 gem "openai"
+
+gem "rubocop", "~> 1.81", group: :development
+gem "rubocop-rails", "~> 2.33", group: :development
+gem "rubocop-performance", "~> 1.26", group: :development

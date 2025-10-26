@@ -1,3 +1,5 @@
 <h1><%= t('import_mailer.failed.title') %></h1>
-<p><%= t('import_mailer.failed.message') %> <strong><%= @import.file.filename %></strong>.</p>
+<p>
+  <%= t('import_mailer.failed.message') %> <strong><%= @import.file.filename %></strong>.
+</p>
 <p><%= t('import_mailer.failed.error') %>: <%= @error %></p>

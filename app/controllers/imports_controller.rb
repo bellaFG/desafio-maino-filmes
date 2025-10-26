@@ -18,10 +18,10 @@ class ImportsController < ApplicationController
       MovieImportWorker.perform_async(@import.id)
 
       redirect_to imports_path,
-                  notice: t('imports.flash.started')
+                  notice: t("imports.flash.started")
     else
       puts "❌ [IMPORTS_CONTROLLER] Falha ao salvar import: #{@import.errors.full_messages.join(', ')}"
-      flash[:alert] = t('imports.flash.error')
+      flash[:alert] = t("imports.flash.error")
       render :new, status: :unprocessable_entity
     end
   end
