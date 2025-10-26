@@ -130,6 +130,7 @@ pt:
       remove_poster: "Remover Poster"
       submit: "Salvar"
       cancel: "Cancelar"
+      fetch_ai: "Preencher dados com IA"
 
     new:
       title: "Novo Filme"

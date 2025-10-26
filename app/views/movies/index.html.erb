@@ -1,10 +1,11 @@
-<h2><%= t('movies.index.title') %></h2>
-
-<div class="filter-toggle-container">
-  <button id="toggle-filter" class="btn btn--filter"><%= t('movies.index.filter') %> ▾</button>
+<div class="index-header">
+  <h2><%= t('movies.index.title') %></h2>
+  <div class="filter-toggle-container">
+    <button id="toggle-filter" class="btn btn--filter"><%= t('movies.index.filter') %> ▾</button>
+  </div>
 </div>
 
-<div id="filter-panel" class="filter-panel hidden">
+<div id="filter-panel" class="filter-panel">
   <%= form_with url: movies_path, method: :get, local: true, class: "filter-form" do |f| %>
     <div class="form-row">
       <div class="form-group">
