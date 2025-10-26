@@ -21,31 +21,15 @@ Rails.application.configure do
   config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Armazenamento de arquivos
-  config.active_storage.service = :local
+  config.active_storage.service = :local # ActiveStorage salva arquivos localmente
 
-  # Segurança e cookies HTTPS
-  config.assume_ssl = true
-  config.force_ssl = true
+  # Gera URLs corretas para imagens (ex: /rails/active_storage/blobs/...)
+  config.active_storage.resolve_model_to_route = :rails_storage_proxy # URLs proxy para arquivos
 
-  config.session_store :cookie_store,
-                       key: "_maino_filmes_session",
-                       secure: true,
-                       same_site: :none
+  # Define o host para assets e URLs de imagens
+  config.asset_host = "https://desafio-maino-filmes.onrender.com" # Host dos assets para Render
 
-  config.action_controller.forgery_protection_origin_check = false
-
-  # 🌐 Domínio padrão da aplicação
-  config.hosts << "desafio-maino-filmes.onrender.com"
-  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-
-  # 🌍 Internacionalização
-  config.i18n.fallbacks = true
-
-  # 📦 Banco de dados
-  config.active_record.dump_schema_after_migration = false
-  config.active_record.attributes_for_inspect = [ :id ]
-
-  # 📧 Configuração do Action Mailer (usando Mailtrap)
+  # Configuração do Action Mailer para links corretos em emails
   config.action_mailer.default_url_options = { host: "desafio-maino-filmes.onrender.com", protocol: "https" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
