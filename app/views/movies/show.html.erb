@@ -70,7 +70,7 @@
           <%= comment.content %>
         </p>
 
-        <% if comment.user == current_user %>
+        <% if (comment.user.present? && comment.user == current_user) || (comment.user.nil? && comment.anon_session_id.present? && cookies.signed[:anon_comment_id] == comment.anon_session_id) %>
           <div class="comment-actions">
             <%= link_to t('movies.show.edit'), edit_movie_comment_path(@movie, comment), class: "btn btn--secondary" %>
             <%= button_to t('movies.show.delete'), movie_comment_path(@movie, comment), method: :delete, data: { confirm: t('movies.show.confirm_delete') }, class: "btn btn--danger" %>

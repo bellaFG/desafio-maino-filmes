@@ -6,6 +6,9 @@ class Comment < ApplicationRecord
   validates :name, presence: true, if: -> { user.nil? }
   validate :user_or_name_present
 
+  # Adiciona campo para identificar comentário anônimo por sessão
+  # (Necessário migration: add_column :comments, :anon_session_id, :string)
+
   private
 
   def user_or_name_present

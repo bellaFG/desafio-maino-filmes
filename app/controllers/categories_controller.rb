@@ -2,30 +2,20 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    name = params[:category][:name].strip
-    normalized_name = I18n.transliterate(name).downcase
-
-    # Busca ignorando caixa e acentos
-    category = Category.all.find { |c| I18n.transliterate(c.name).downcase == normalized_name }
-    if category
-      render json: { id: category.id, name: category.name }
+    result = Categories::CreateCategoryService.call(params[:category][:name])
+    if result[:error]
+      render json: { error: result[:error] }, status: :unprocessable_entity
     else
-      category = Category.new(name: name)
-      if category.save
-        render json: { id: category.id, name: category.name }
-      else
-        render json: { error: category.errors.full_messages.join(", ") }, status: :unprocessable_entity
-      end
+      render json: { id: result[:id], name: result[:name] }
     end
   end
 
   def destroy
-    category = Category.find_by(id: params[:id])
-    if category
-      category.destroy
-      render json: { success: true }
+    result = Categories::DestroyCategoryService.call(params[:id])
+    if result[:error]
+      render json: { error: result[:error] }, status: :not_found
     else
-      render json: { error: "Categoria não encontrada." }, status: :not_found
+      render json: { success: true }
     end
   end
 end
