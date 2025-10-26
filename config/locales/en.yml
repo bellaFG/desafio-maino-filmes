@@ -176,7 +176,7 @@ en:
     unauthorized: "Unauthorized access."
 
   buttons:
-    submit: "Save"
+    submit: "Send"
     cancel: "Cancel"
     edit: "Edit"
     delete: "Delete"

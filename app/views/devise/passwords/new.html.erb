@@ -1,0 +1,24 @@
+<div class="form-container">
+  <h2 class="form-title"><%= t('devise.passwords.new.forgot_password') %></h2>
+
+  <% if resource.errors.any? %>
+    <div class="alert">
+      <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with(model: resource, as: resource_name, url: password_path(resource_name), local: true, class: "password-form", data: { turbo: false }) do |f| %>
+    <div class="form-group">
+      <%= f.label :email, t('activerecord.attributes.user.email'), class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit t('buttons.submit'), class: "btn btn--primary" %>
+    </div>
+  <% end %>
+</div>
