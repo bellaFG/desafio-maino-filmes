@@ -1,20 +1,34 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: 127.0.0.1
-  port: 5432
-  username: postgres
-  password: "257941"
   pool: 5
 
 development:
   <<: *default
+  host: 127.0.0.1
+  port: 5432
+  username: postgres
+  password: "257941"
   database: maino_filmes_development
 
 test:
   <<: *default
+  host: 127.0.0.1
+  port: 5432
+  username: postgres
+  password: "257941"
   database: maino_filmes_test
 
 production:
   <<: *default
-  database: maino_filmes_production
+  url: <%= ENV["DATABASE_URL"] %>
+
+  # Conexão usada pelo Solid Cable (ActionCable via PostgreSQL)
+  cable:
+    adapter: postgresql
+    url: <%= ENV["DATABASE_URL"] %>
+
+  # Caso você use Solid Queue (opcional)
+  queue:
+    adapter: postgresql
+    url: <%= ENV["DATABASE_URL"] %>
