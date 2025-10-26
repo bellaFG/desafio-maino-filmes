@@ -40,8 +40,18 @@ Rails.application.configure do
   # ==============================
   # URLs, assets e host
   # ==============================
-  config.hosts << "desafio-maino-filmes.onrender.com"
-  Rails.application.routes.default_url_options[:host] = "desafio-maino-filmes.onrender.com"
+
+  Rails.application.configure do
+    # ...
+    config.hosts.clear
+    config.action_controller.forgery_protection_origin_check = false
+
+    Rails.application.routes.default_url_options = {
+      host: "desafio-maino-filmes.onrender.com",
+      protocol: "https"
+    }
+    # ...
+  end
 
   config.asset_host = "https://desafio-maino-filmes.onrender.com"
   config.action_mailer.default_url_options = {
