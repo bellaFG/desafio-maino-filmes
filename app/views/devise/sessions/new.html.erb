@@ -1,6 +1,7 @@
+<!-- Turbo desativado para evitar erro 422 (CSRF) em produção -->
 <h2>Login</h2>
 
-<%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
+<%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, data: { turbo: false }) do |f| %>
   <div class="form-group">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, class: "form-control" %>
