@@ -47,6 +47,14 @@ footer {
   justify-content: center;
 }
 
+.header__right,
+.nav__profile,
+.profile-icon,
+.btn-logout,
+.nav__link {
+  transition: all 0.3s ease;
+}
+
 .header__right {
   display: flex;
   align-items: center;
@@ -72,7 +80,6 @@ footer {
 .nav__profile {
   position: relative;
   display: inline-block;
-  transition: transform 0.3s ease;
 }
 
 .nav__profile:hover {
@@ -86,7 +93,6 @@ footer {
   object-fit: cover;
   border: 2px solid #09f;
   box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
-  transition: all 0.3s ease;
 }
 
 .profile-icon:hover {
@@ -114,7 +120,13 @@ footer {
 }
 
 /* BOTÕES */
-.btn {
+.btn,
+.btn--primary,
+.btn--secondary,
+.btn--danger,
+.btn--filter,
+.btn--search,
+.btn--lang {
   display: inline-block;
   font-weight: 500;
   border: none;
@@ -123,8 +135,11 @@ footer {
   cursor: pointer;
   text-decoration: none;
   color: #fff;
-  background: linear-gradient(135deg, #1b1b1d, #2b2b2e);
   transition: all 0.3s ease;
+}
+
+.btn {
+  background: linear-gradient(135deg, #1b1b1d, #2b2b2e);
 }
 
 .btn:hover {
@@ -176,7 +191,6 @@ footer {
   padding: 0.3rem 0.8rem;
   border-radius: 5px;
   margin: 0 0.2rem;
-  transition: all 0.3s ease;
 }
 
 .btn--lang:hover {
@@ -195,11 +209,10 @@ footer {
   margin-bottom: 0.5rem;
   font-weight: 500;
   color: #d1d1d1;
-  margin-bottom: 0.4rem;
-  display: block;
 }
 
-.form-control {
+.form-control,
+.form-control-file {
   width: 100%;
   background-color: #1c1c1e;
   border: 1px solid #333;
@@ -209,7 +222,8 @@ footer {
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-control-file:focus {
   outline: none;
   border-color: #09f;
   background-color: #2a2a2d;
@@ -219,12 +233,37 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #ccc;
+  margin-bottom: 0.4rem;
 }
 
 .actions {
   margin-top: 1.5rem;
   display: flex;
   gap: 1rem;
+  text-align: right;
+}
+
+.actions .btn,
+.comment-actions .btn,
+.movie-card .btn {
+  min-width: 100px;
+  height: 42px;
+  line-height: 1;
+  font-size: 0.95rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.7rem 1.4rem;
+}
+
+.comment-actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 /* Botão de adicionar filme */
@@ -266,6 +305,7 @@ footer {
   font-weight: 600;
   color: #09f;
   text-decoration: none !important;
+  transition: color 0.3s ease;
 }
 
 .movie-card__title a:hover {
@@ -279,7 +319,6 @@ footer {
 
 .poster-img {
   width: 200px;
-
   border-radius: 10px;
   transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
@@ -329,6 +368,8 @@ footer {
   margin-top: 0.5rem;
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 /* Responsivo */
@@ -404,7 +445,6 @@ footer {
   cursor: pointer;
   padding: 0.6rem;
   border-radius: 50%;
-  transition: all 0.3s ease;
 }
 
 .btn--search:hover {
@@ -463,7 +503,6 @@ footer {
   margin: 0.3rem;
   font-size: 0.85rem;
   font-weight: 500;
-  transition: all 0.3s ease;
 }
 
 .tag:hover {
@@ -489,7 +528,6 @@ footer {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .btn-logout:hover {
@@ -502,32 +540,7 @@ footer {
   outline: none;
 }
 
-/* Padronização apenas dos botões de ação */
-.actions .btn,
-.comment-actions .btn,
-.movie-card .btn {
-  min-width: 100px;
-  height: 42px;
-  line-height: 1;
-  font-size: 0.95rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0.7rem 1.4rem;
-}
-
-.actions,
-.comment-actions {
-  display: flex;
-  gap: 0.8rem;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
 /* FORMULÁRIOS DE USUÁRIO */
-
-/* Container principal */
 .form-container {
   background-color: #1c1c1e;
   border: 1px solid #2a2a2d;
@@ -536,7 +549,6 @@ footer {
   margin: 2rem auto;
   max-width: 480px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-container:hover {
@@ -544,7 +556,6 @@ footer {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
-/* Título do formulário */
 .form-title {
   font-size: 1.8rem;
   font-weight: 600;
@@ -553,7 +564,6 @@ footer {
   text-align: center;
 }
 
-/* Form groups e labels */
 .form-group {
   margin-bottom: 1.2rem;
 }
@@ -565,7 +575,6 @@ footer {
   color: #ccc;
 }
 
-/* Inputs */
 .form-control,
 .form-control-file {
   width: 100%;
@@ -574,7 +583,6 @@ footer {
   border-radius: 8px;
   padding: 0.6rem 0.8rem;
   color: #eee;
-  transition: all 0.3s ease;
 }
 
 .form-control:focus,
@@ -584,7 +592,6 @@ footer {
   background-color: #2a2a2d;
 }
 
-/* Dica/hint */
 .hint {
   font-size: 0.85rem;
   color: #777;
@@ -592,7 +599,6 @@ footer {
   margin-top: 0.2rem;
 }
 
-/* Avatar */
 .avatar-group {
   display: flex;
   flex-direction: column;
@@ -627,14 +633,12 @@ footer {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: all 0.3s ease;
 }
 
 .btn-remove-avatar:hover {
   background: linear-gradient(135deg, #e03b49, #c01d2d);
 }
 
-/* Botões de ação do formulário */
 .form-actions {
   margin-top: 1.5rem;
   display: flex;
@@ -650,7 +654,6 @@ footer {
   border-radius: 8px;
   padding: 0.7rem 1.4rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
@@ -664,7 +667,6 @@ footer {
   border-radius: 8px;
   padding: 0.7rem 1.4rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .btn-cancel:hover {
@@ -725,9 +727,9 @@ a:hover {
   padding: 0.4rem 0.8rem;
   border-radius: 1rem;
   text-decoration: none;
-  transition: all 0.2s ease;
   font-weight: 500;
   font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
 .pagination a:hover {
@@ -815,21 +817,18 @@ a:hover {
   color: #999;
 }
 
-.actions {
-  margin-top: 1.5rem;
-  text-align: right;
-}
-
 /* ===========================
    Integração IA no formulário
 =========================== */
-.title-ai-wrapper {
+.title-ai-wrapper,
+.movie-form .title-ai-wrapper {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-#fetch-movie {
+#fetch-movie,
+.movie-form #fetch-movie {
   white-space: nowrap;
   padding: 0.6rem 1rem;
   font-weight: 500;
@@ -837,19 +836,25 @@ a:hover {
   cursor: pointer;
   border: none;
   border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  border: 1px solid #333;
   transition: background-color 0.2s ease-in-out;
 }
 
-#fetch-movie.btn--secondary {
+#fetch-movie.btn--secondary,
+.movie-form #fetch-movie.btn--secondary {
   background-color: #1a1a1a;
   color: #e0e0e0;
 }
 
-#fetch-movie.btn--secondary:hover {
+#fetch-movie.btn--secondary:hover,
+.movie-form #fetch-movie.btn--secondary:hover {
   background-color: #2c2c2c;
 }
 
-#fetch-movie:disabled {
+#fetch-movie:disabled,
+.movie-form #fetch-movie:disabled {
   background-color: #333;
   color: #999;
   cursor: not-allowed;
@@ -894,36 +899,6 @@ a:hover {
   box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.2);
 }
 
-/* Layout do botão de IA */
-.movie-form .title-ai-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.movie-form #fetch-movie {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 0.6rem 1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.movie-form #fetch-movie:hover {
-  background-color: #2c2c2c;
-}
-
-.movie-form #fetch-movie:disabled {
-  background-color: #333;
-  color: #999;
-  cursor: not-allowed;
-}
-
-/* Checkboxes */
 .movie-form .form-check {
   display: flex;
   align-items: center;
@@ -932,7 +907,6 @@ a:hover {
   margin-bottom: 0.4rem;
 }
 
-/* Ações do formulário */
 .movie-form .actions {
   margin-top: 1.5rem;
   display: flex;
@@ -948,7 +922,6 @@ a:hover {
   justify-content: center;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .movie-form {
     padding: 1.5rem;
@@ -990,7 +963,6 @@ a:hover {
 .nav__profile {
   position: relative;
   display: inline-block;
-  transition: transform 0.3s ease;
 }
 
 .nav__profile:hover {
@@ -1004,7 +976,6 @@ a:hover {
   object-fit: cover;
   border: 2px solid #09f;
   box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
-  transition: all 0.3s ease;
 }
 
 .profile-icon:hover {
@@ -1021,7 +992,6 @@ a:hover {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .btn-logout:hover {
@@ -1036,7 +1006,6 @@ a:hover {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  transition: all 0.3s ease;
   border: 1px solid transparent;
 }
 
@@ -1096,7 +1065,6 @@ a:hover {
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   font-size: 0.9rem;
-  transition: all 0.3s ease;
 }
 
 .btn--filter:hover {

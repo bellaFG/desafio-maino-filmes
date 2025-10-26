@@ -1,5 +1,5 @@
 en:
-  app_name: "Maino Movies"
+  app_name: "Mainô Movies"
   devise:
     sessions:
       signed_in: "Signed in successfully."

@@ -1,5 +1,5 @@
 pt:
-  app_name: "Maino Filmes"
+  app_name: "Mainô Filmes"
   devise:
     sessions:
       signed_in: "Login efetuado com sucesso."
