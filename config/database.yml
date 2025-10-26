@@ -22,13 +22,3 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-
-  # Conexão usada pelo Solid Cable (ActionCable via PostgreSQL)
-  cable:
-    adapter: postgresql
-    url: <%= ENV["DATABASE_URL"] %>
-
-  # Caso você use Solid Queue (opcional)
-  queue:
-    adapter: postgresql
-    url: <%= ENV["DATABASE_URL"] %>
