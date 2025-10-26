@@ -64,13 +64,24 @@ Rails.application.configure do
   # ==============================
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              "sandbox.smtp.mailtrap.io",
-    port:                 2525,
-    user_name:            ENV["SMTP_USERNAME"],
-    password:             ENV["SMTP_PASSWORD"],
-    authentication:       "plain",
+    user_name: "apikey", # literal
+    password: ENV["SENDGRID_API_KEY"],
+    domain: "desafio-maino-filmes.onrender.com",
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: :plain,
     enable_starttls_auto: true
   }
+
+  config.action_mailer.default_options = {
+    from: ENV["MAIL_SENDER"] || "isabella.ferzales@gmail.com"
+  }
+
+  config.action_mailer.default_url_options = {
+    host: "desafio-maino-filmes.onrender.com",
+    protocol: "https"
+  }
+
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 end
