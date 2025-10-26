@@ -1,14 +1,14 @@
 <div class="page-container">
-  <h2 class="page-title">📊 Histórico de Importações</h2>
+  <h2 class="page-title"><%= t('imports.title') %></h2>
 
   <% if @imports.any? %>
     <table class="table table-dark">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Arquivo</th>
-          <th>Status</th>
-          <th>Data</th>
+          <th><%= t('imports.file') %></th>
+          <th><%= t('imports.status') %></th>
+          <th><%= t('imports.date') %></th>
         </tr>
       </thead>
 
@@ -23,20 +23,20 @@
                             target: "_blank",
                             class: "file-link" %>
               <% else %>
-                <span class="text-muted">Nenhum arquivo</span>
+                <span class="text-muted"><%= t('imports.no_file') %></span>
               <% end %>
             </td>
 
             <td>
               <% case import.status %>
               <% when "pending" %>
-                <span class="status-badge pending">⏳ Pendente</span>
+                <span class="status-badge pending"><%= t('imports.status_labels.pending') %></span>
               <% when "processing" %>
-                <span class="status-badge processing">🔄 Processando</span>
+                <span class="status-badge processing"><%= t('imports.status_labels.processing') %></span>
               <% when "finished" %>
-                <span class="status-badge success">✅ Concluída</span>
+                <span class="status-badge success"><%= t('imports.status_labels.finished') %></span>
               <% when "failed" %>
-                <span class="status-badge failed">❌ Falhou</span>
+                <span class="status-badge failed"><%= t('imports.status_labels.failed') %></span>
               <% end %>
             </td>
 
@@ -46,10 +46,10 @@
       </tbody>
     </table>
   <% else %>
-    <p class="empty-message">Nenhuma importação encontrada.</p>
+    <p class="empty-message"><%= t('imports.empty_message') %></p>
   <% end %>
 
   <div class="actions">
-    <%= link_to "➕ Nova Importação", new_import_path, class: "btn btn-primary" %>
+    <%= link_to t('imports.new_import'), new_import_path, class: "btn btn-primary" %>
   </div>
 </div>

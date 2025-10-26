@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h2 class="form-title">📦 Importar Filmes (CSV)</h2>
+  <h2 class="form-title"><%= t('imports.new.title') %></h2>
 
   <%= form_with model: @import, local: true, html: { multipart: true, class: "import-form" }, data: { turbo: false } do |f| %>
     <% if @import.errors.any? %>
@@ -13,17 +13,17 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :file, "Selecione o arquivo CSV", class: "form-label" %>
+      <%= f.label :file, t('imports.new.select_file'), class: "form-label" %>
       <%= f.file_field :file, accept: ".csv", class: "form-control" %>
     </div>
 
     <div class="form-actions">
-      <%= f.submit "Iniciar Importação", class: "btn btn-primary" %>
-      <%= link_to "Histórico de Importações", imports_path, class: "btn btn-secondary" %>
+      <%= f.submit t('imports.new.start_import'), class: "btn btn-primary" %>
+      <%= link_to t('imports.new.import_history'), imports_path, class: "btn btn-secondary" %>
     </div>
   <% end %>
 
   <p class="form-hint">
-    O arquivo deve conter as colunas: <strong>title, director, year, duration, synopsis</strong>.
+    <%= t('imports.new.file_format_hint') %>
   </p>
 </div>

@@ -2,7 +2,7 @@
 <html lang="<%= I18n.locale %>">
 <head>
   <meta charset="UTF-8">
-  <title>Maino Filmes</title>
+  <title><%= t('app_name') %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -20,7 +20,7 @@
 <body>
   <header class="header">
     <h1 class="header__logo">
-      <%= link_to "Maino Filmes", movies_path, class: "header__link" %>
+      <%= link_to t('app_name'), movies_path, class: "header__link" %>
     </h1>
 
     <div class="header__center">
@@ -37,9 +37,9 @@
 
           <%= link_to edit_user_registration_path, id: "profile-link", class: "nav__profile" do %>
             <% if current_user.avatar.attached? %>
-              <%= image_tag url_for(current_user.avatar), class: "profile-icon", alt: "Foto de Perfil" %>
+              <%= image_tag url_for(current_user.avatar), class: "profile-icon", alt: t('users.profile_picture') %>
             <% else %>
-              <%= image_tag "default-user.png", class: "profile-icon", alt: "Foto de Perfil Padrão" %>
+              <%= image_tag "default-user.png", class: "profile-icon", alt: t('users.default_profile_picture') %>
             <% end %>
           <% end %>
 
@@ -74,7 +74,7 @@
   </main>
 
   <footer class="footer">
-    &copy; <%= Time.current.year %> Maino Filmes
+    &copy; <%= Time.current.year %> <%= t('app_name') %>
   </footer>
 </body>
 </html>

@@ -1,4 +1,5 @@
 pt:
+  app_name: "Maino Filmes"
   devise:
     sessions:
       signed_in: "Login efetuado com sucesso."
@@ -16,9 +17,20 @@ pt:
       new:
         sign_up: "Cadastrar-se"
       edit:
-        edit_account: "Editar Conta"
-        cancel_account: "Cancelar Conta"
-        not_saved: "Não foi possível salvar"
+        title: "Editar Perfil"
+        name: "Nome"
+        email: "Email"
+        avatar: "Foto de Perfil"
+        current_avatar: "Sua foto atual"
+        default_avatar: "Foto padrão"
+        remove_avatar: "Remover foto"
+        new_password: "Nova Senha"
+        password_hint: "deixe em branco se não quiser alterar"
+        password_confirmation: "Confirmação da Senha"
+        current_password: "Senha Atual"
+        current_password_hint: "necessário para confirmar mudanças"
+        update: "Atualizar"
+        cancel: "Cancelar"
     passwords:
       send_instructions: "Instruções de redefinição de senha enviadas por e-mail."
       updated: "Senha alterada com sucesso."
@@ -56,15 +68,15 @@ pt:
               blank: "não pode ficar em branco"
 
   search:
-    placeholder: "Buscar..."
+    placeholder: "Buscar filmes..."
     button: "Buscar"
 
   header:
     hello: "Olá"
     profile: "Perfil"
     logout: "Sair"
-    login: "Login"
-    register: "Cadastrar"
+    login: "Entrar"
+    register: "Registrar"
 
   movies:
     index:
@@ -86,9 +98,11 @@ pt:
         apply: "Aplicar Filtros"
 
     show:
-      director: "Diretor"
+      title: "Título"
+      synopsis: "Sinopse"
       year: "Ano"
       duration: "Duração"
+      director: "Diretor"
       categories: "Categorias"
       tags: "Tags"
       no_tags: "Sem tags"
@@ -125,6 +139,13 @@ pt:
       title: "Editar Filme"
       show: "Ver Filme"
       back: "Voltar para filmes"
+
+    ai:
+      title_required: "Título não informado"
+      invalid_data: "IA não retornou dados válidos"
+      integration_error: "Erro na integração com a IA: %{message}"
+      enter_title: "Digite um título antes de buscar!"
+      searching: "🤖 Buscando..."
 
 
   comments:
@@ -165,4 +186,18 @@ pt:
       gap: "…"
       first: "Primeira"
       last: "Última"
-    
+
+  users:
+    profile_picture: "Foto de Perfil"
+    default_profile_picture: "Foto de Perfil Padrão"
+
+  imports:
+    new:
+      title: "📦 Importar Filmes (CSV)"
+      select_file: "Selecione o arquivo CSV"
+      start_import: "Iniciar Importação"
+      import_history: "Histórico de Importações"
+      file_format_hint: "O arquivo deve conter as colunas: title, director, year, duration, synopsis."
+    flash:
+      started: "📦 Importação iniciada! Você será notificado(a) quando o processo for concluído."
+      error: "❌ Erro ao enviar o arquivo CSV. Verifique e tente novamente."
