@@ -60,19 +60,8 @@ Rails.application.configure do
   }
 
   # ==============================
-  # E-mail (SendGrid para produção no Render)
+  # E-mail (SendGrid via API)
   # ==============================
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    user_name: "apikey", # literal, obrigatório
-    password: ENV["SENDGRID_API_KEY"],
-    domain: "desafio-maino-filmes.onrender.com",
-    address: "smtp.sendgrid.net",
-    port: 587,
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
-
   config.action_mailer.default_options = {
     from: ENV["MAIL_SENDER"] || "no-reply@desafio-maino-filmes.onrender.com"
   }

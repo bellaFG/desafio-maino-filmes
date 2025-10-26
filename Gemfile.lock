@@ -321,6 +321,7 @@ GEM
     ruby-vips (2.2.5)
       ffi (~> 1.12)
       logger
+    ruby_http_client (3.5.5)
     rubyzip (3.2.0)
     securerandom (0.4.1)
     selenium-webdriver (4.37.0)
@@ -329,6 +330,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    sendgrid-ruby (6.7.0)
+      ruby_http_client (~> 3.4)
     sidekiq (8.0.8)
       connection_pool (>= 2.5.0)
       json (>= 2.9.0)
@@ -430,6 +433,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.33)
   rubocop-rails-omakase
   selenium-webdriver
+  sendgrid-ruby (~> 6.7)
   sidekiq
   simplecov
   solid_cable

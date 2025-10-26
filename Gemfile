@@ -78,3 +78,5 @@ gem "openai"
 gem "rubocop", "~> 1.81", group: :development
 gem "rubocop-rails", "~> 2.33", group: :development
 gem "rubocop-performance", "~> 1.26", group: :development
+
+gem "sendgrid-ruby", "~> 6.7"
