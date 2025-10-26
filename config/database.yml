@@ -1,36 +1,20 @@
-# config/database.yml
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: 127.0.0.1
+  port: 5432
+  username: postgres
+  password: "257941"
+  pool: 5
 
 development:
   <<: *default
   database: maino_filmes_development
-  username: postgres
-  password: 257941
-  host: localhost
-  port: 5432
 
 test:
   <<: *default
   database: maino_filmes_test
-  username: postgres
-  password: 257941
-  host: localhost
-  port: 5432
 
-production: &production
+production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-# Solid Stack Databases
-queue:
-  <<: *production
-
-cache:
-  <<: *production
-
-cable:
-  <<: *production
+  database: maino_filmes_production
