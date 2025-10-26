@@ -1,5 +1,6 @@
 pt:
   app_name: "Mainô Filmes"
+
   devise:
     sessions:
       signed_in: "Login efetuado com sucesso."
@@ -39,16 +40,6 @@ pt:
       new:
         forgot_password: "Esqueci minha senha"
 
-  errors:
-    messages:
-      not_saved: "Não foi possível salvar: %{count} erro(s)"
-      record_invalid: "Validação falhou: %{errors}"
-      confirmation: "não coincide com a confirmação"
-      blank: "não pode ficar em branco"
-      restrict_dependent_destroy:
-        one: "Não é possível excluir o registro pois existe um %{record} dependente"
-        many: "Não é possível excluir o registro pois existem %{record} dependentes"
-
   activerecord:
     attributes:
       user:
@@ -57,6 +48,7 @@ pt:
         password: "Senha"
         password_confirmation: "Confirmação da Senha"
         current_password: "Senha Atual"
+
     errors:
       models:
         user:
@@ -65,6 +57,7 @@ pt:
               blank: "não pode ficar em branco"
             email:
               blank: "não pode ficar em branco"
+              taken: "já está em uso"
             password:
               blank: "não pode ficar em branco"
             password_confirmation:
@@ -72,6 +65,15 @@ pt:
               confirmation: "não coincide com a confirmação"
             current_password:
               blank: "não pode ficar em branco"
+      messages:
+        taken: "já está em uso"
+        blank: "não pode ficar em branco"
+        confirmation: "não coincide com a confirmação"
+        not_saved: "Não foi possível salvar: %{count} erro(s)"
+        record_invalid: "Validação falhou: %{errors}"
+        restrict_dependent_destroy:
+          one: "Não é possível excluir o registro pois existe um %{record} dependente"
+          many: "Não é possível excluir o registro pois existem %{record} dependentes"
 
   search:
     placeholder: "Buscar filmes..."
@@ -180,21 +182,6 @@ pt:
     login_success: "Login efetuado com sucesso."
     logout_success: "Logout efetuado com sucesso."
     unauthorized: "Acesso não autorizado."
-
-  buttons:
-    submit: "Salvar"
-    cancel: "Cancelar"
-    edit: "Editar"
-    delete: "Apagar"
-    view_details: "Ver detalhes"
-
-  views:
-    pagination:
-      previous: "← Anterior"
-      next: "Próxima →"
-      gap: "…"
-      first: "Primeira"
-      last: "Última"
 
   users:
     profile_picture: "Foto de Perfil"
