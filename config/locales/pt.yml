@@ -148,7 +148,6 @@ pt:
       enter_title: "Digite um título antes de buscar!"
       searching: "🤖 Buscando..."
 
-
   comments:
     new:
       title: "Novo Comentário"
@@ -179,7 +178,7 @@ pt:
     edit: "Editar"
     delete: "Apagar"
     view_details: "Ver detalhes"
-    
+
   views:
     pagination:
       previous: "← Anterior"
@@ -202,3 +201,8 @@ pt:
     flash:
       started: "📦 Importação iniciada! Você será notificado(a) quando o processo for concluído."
       error: "❌ Erro ao enviar o arquivo CSV. Verifique e tente novamente."
+
+  time:
+    formats:
+      short: "%d/%m/%Y %H:%M"
+      long: "%d de %B de %Y às %H:%M"

@@ -213,3 +213,8 @@ en:
       title: "✅ Import completed!"
       message: "Your file has been processed successfully."
       success: "Movies imported successfully. 🎬"
+
+  time:
+    formats:
+      short: "%m/%d/%Y %H:%M"
+      long: "%B %d, %Y at %H:%M"

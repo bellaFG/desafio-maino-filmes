@@ -62,7 +62,7 @@ class MoviesController < ApplicationController
 
   def fetch_movie_data
     title = params[:title]
-    return render json: { error: "Título não informado" }, status: :bad_request if title.blank?
+    return render json: { error: I18n.t("movies.errors.title_required") }, status: :bad_request if title.blank?
 
     begin
       client = OpenAI::Client.new(api_key: ENV["OPENAI_API_KEY"])

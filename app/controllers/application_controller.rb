@@ -56,10 +56,12 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_locale
+    return if request.xhr? # Skip redirect for AJAX calls
+
     if request.path == "/" || request.path == "/en" || request.path == "/pt"
       redirect_to movies_path(locale: extract_locale)
     elsif !params[:locale].present?
-      redirect_to "/#{extract_locale}#{request.path}", allow_other_host: true
+      redirect_to "/#{extract_locale}#{request.path}?#{request.query_string}", allow_other_host: true
     end
   end
 end
