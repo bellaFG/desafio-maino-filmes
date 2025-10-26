@@ -1,17 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  synopsis: MyText
-  year: 1
-  duration: 1
-  director: MyString
+  title: "Test Movie"
+  synopsis: "Test synopsis"
+  year: 2023
+  duration: 120
+  director: "Test Director"
   user: one
+  categories: [action, drama]
 
 two:
-  title: MyString
-  synopsis: MyText
-  year: 1
-  duration: 1
-  director: MyString
+  title: "Another Movie"
+  synopsis: "Another synopsis"
+  year: 2022
+  duration: 90
+  director: "Another Director"
   user: two
+  categories: [comedy]

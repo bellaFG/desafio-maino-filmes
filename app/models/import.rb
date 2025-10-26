@@ -1,16 +1,14 @@
 class Import < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   has_one_attached :file
 
-  enum :status, { pending: "pending", processing: "processing", finished: "finished", failed: "failed" }
-
   validates :file, presence: true
+  validates :status, presence: true
 
-  after_initialize :set_default_status, if: :new_record?
-
-  private
-
-  def set_default_status
-    self.status ||= :pending
-  end
+  enum :status, {
+    pending: 'pending',
+    processing: 'processing',
+    finished: 'finished',
+    failed: 'failed'
+  }, default: 'pending'
 end
