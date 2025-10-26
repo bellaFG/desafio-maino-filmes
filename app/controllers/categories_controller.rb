@@ -3,7 +3,10 @@ class CategoriesController < ApplicationController
 
   def create
     name = params[:category][:name].strip
-    category = Category.find_by(name: name)
+    normalized_name = I18n.transliterate(name).downcase
+
+    # Busca ignorando caixa e acentos
+    category = Category.all.find { |c| I18n.transliterate(c.name).downcase == normalized_name }
     if category
       render json: { id: category.id, name: category.name }
     else

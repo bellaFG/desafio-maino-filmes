@@ -77,6 +77,8 @@ function setupCategoryForm() {
   var input = document.querySelector('input[name="new_category"]');
   var btn = document.getElementById('add-category-btn');
   var categoriesList = document.getElementById('categories-list');
+  
+  if (!categoriesList) return;
 
   if (input) {
     input.onkeydown = null;

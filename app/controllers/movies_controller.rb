@@ -66,12 +66,12 @@ class MoviesController < ApplicationController
 
     begin
       client = OpenAI::Client.new(api_key: ENV["OPENAI_API_KEY"])
-      available_categories = Category.pluck(:name)
+      available_categories = Category.all.map(&:name)
 
       prompt = <<~PROMPT
         Gere informações resumidas e objetivas sobre o filme "#{title}" no formato JSON.
-        Escolha apenas uma categoria entre as disponíveis abaixo.
-        Se nenhuma se encaixar, use "Outros".
+        Escolha a categoria mais adequada para o filme, mesmo que não esteja na lista abaixo.
+        Se a categoria não estiver na lista, retorne a categoria correta para o filme.
         Também gere uma lista de até 10 tags curtas iniciando cada uma com letra maiúscula relacionadas ao filme (temas, estilos, palavras-chave).
 
         Categorias disponíveis: #{available_categories.join(", ")}
@@ -102,11 +102,21 @@ class MoviesController < ApplicationController
 
       puts "📊 PARSED DATA: #{data.inspect}"
 
-      unless available_categories.include?(data["category"])
-        data["category"] = "Outros"
-      end
-
       data["tags"] ||= []
+
+      # Busca categoria existente ignorando caixa/acentos
+      if data["category"].present?
+        normalized = I18n.transliterate(data["category"].strip).downcase
+        existing_category = Category.all.find { |c| I18n.transliterate(c.name).downcase == normalized }
+        if existing_category
+          data["category"] = existing_category.name
+        else
+          category = Category.create(name: data["category"].strip)
+          data["category"] = category.name
+          available_categories << category.name
+          puts "🆕 Categoria criada pela IA: #{category.name}"
+        end
+      end
 
       if data["title"].blank?
         render json: { error: "IA não retornou dados válidos." }, status: :unprocessable_entity
