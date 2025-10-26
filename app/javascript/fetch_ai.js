@@ -1,6 +1,4 @@
 function initFetchAI() {
-  console.log("🤖 fetch_ai.js inicializado!");
-
   const fetchBtn = document.getElementById("fetch-ai-btn");
   if (!fetchBtn) return;
 
@@ -34,7 +32,6 @@ function initFetchAI() {
         return;
       }
 
-      // Preenche campos
       const map = {
         title: "movie_title",
         synopsis: "movie_synopsis",
@@ -47,7 +44,6 @@ function initFetchAI() {
         if (field && data[key]) field.value = data[key];
       });
 
-      // ----- 🔽 Categoria -----
       if (data.category) {
         const normalize = (str) =>
           str
@@ -64,7 +60,6 @@ function initFetchAI() {
           const parent = cb.closest(".form-check");
           if (!parent) return;
 
-          // Captura texto puro (sem botões)
           const rawText = Array.from(parent.childNodes)
             .filter((n) => n.nodeType === Node.TEXT_NODE)
             .map((n) => n.textContent)
@@ -80,7 +75,6 @@ function initFetchAI() {
         if (existingCategory) {
           existingCategory.checked = true;
         } else {
-          // Cria nova categoria se não existir
           const locale = (window.location.pathname.match(/^\/(pt|en)\b/) || [])[1] || "pt";
           const endpoint = "/" + locale + "/categories";
 
@@ -133,15 +127,11 @@ function initFetchAI() {
         }
       }
 
-      // ----- 🔽 Tags -----
       if (Array.isArray(data.tags) && data.tags.length > 0) {
         const tagInput = document.getElementById("movie_tags");
         if (tagInput) tagInput.value = data.tags.join(", ");
       }
-
-      console.log("✅ Dados da IA aplicados com sucesso!", data);
     } catch (error) {
-      console.error("💥 Erro ao buscar dados da IA:", error);
       alert("Ocorreu um erro ao buscar dados da IA: " + error.message);
     } finally {
       fetchBtn.disabled = false;

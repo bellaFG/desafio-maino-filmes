@@ -6,21 +6,15 @@ class ImportsController < ApplicationController
   end
 
   def create
-    puts "🚀 [IMPORTS_CONTROLLER] Iniciando importação..."
-
     @import = current_user.imports.build(import_params)
     @import.status = :pending  # garante o status inicial
-    puts "📦 [IMPORTS_CONTROLLER] Arquivo recebido: #{import_params[:file]&.original_filename}"
 
     if @import.save
-      puts "✅ [IMPORTS_CONTROLLER] Import salvo no banco com ID: #{@import.id}"
-      puts "🧵 [IMPORTS_CONTROLLER] Enfileirando job Sidekiq..."
       MovieImportWorker.perform_async(@import.id)
 
       redirect_to imports_path,
                   notice: t("imports.flash.started")
     else
-      puts "❌ [IMPORTS_CONTROLLER] Falha ao salvar import: #{@import.errors.full_messages.join(', ')}"
       flash[:alert] = t("imports.flash.error")
       render :new, status: :unprocessable_entity
     end

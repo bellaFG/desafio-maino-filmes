@@ -7,8 +7,6 @@ class MovieAiService
     url = "https://www.omdbapi.com/?t=#{URI.encode_www_form_component(title)}&apikey=#{key}"
     response = Net::HTTP.get(URI(url))
     data = JSON.parse(response)
-    puts url
-    puts data
     return nil unless data["Response"] == "True"
 
     {

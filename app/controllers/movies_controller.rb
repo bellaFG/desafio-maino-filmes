@@ -94,17 +94,12 @@ class MoviesController < ApplicationController
         temperature: 0.3
       )
 
-      puts "🔍 OPENAI RESPONSE: #{response.inspect}"
-
       content = response.choices[0].message[:content]
       cleaned = content.gsub(/```json/i, "").gsub(/```/, "").strip
       data = JSON.parse(cleaned) rescue {}
 
-      puts "📊 PARSED DATA: #{data.inspect}"
-
       data["tags"] ||= []
 
-      # Busca categoria existente ignorando caixa/acentos
       if data["category"].present?
         normalized = I18n.transliterate(data["category"].strip).downcase
         existing_category = Category.all.find { |c| I18n.transliterate(c.name).downcase == normalized }
@@ -114,7 +109,6 @@ class MoviesController < ApplicationController
           category = Category.create(name: data["category"].strip)
           data["category"] = category.name
           available_categories << category.name
-          puts "🆕 Categoria criada pela IA: #{category.name}"
         end
       end
 
@@ -124,7 +118,6 @@ class MoviesController < ApplicationController
         render json: data
       end
     rescue => e
-      puts "💥 ERRO IA: #{e.full_message}"
       render json: { error: "Erro na integração com a IA: #{e.message}" }, status: :internal_server_error
     end
   end
