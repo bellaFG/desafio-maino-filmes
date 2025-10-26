@@ -39,6 +39,16 @@ pt:
       new:
         forgot_password: "Esqueci minha senha"
 
+  errors:
+    messages:
+      not_saved: "Não foi possível salvar: %{count} erro(s)"
+      record_invalid: "Validação falhou: %{errors}"
+      confirmation: "não coincide com a confirmação"
+      blank: "não pode ficar em branco"
+      restrict_dependent_destroy:
+        one: "Não é possível excluir o registro pois existe um %{record} dependente"
+        many: "Não é possível excluir o registro pois existem %{record} dependentes"
+
   activerecord:
     attributes:
       user:
@@ -48,10 +58,6 @@ pt:
         password_confirmation: "Confirmação da Senha"
         current_password: "Senha Atual"
     errors:
-      messages:
-        not_saved: "Não foi possível salvar"
-        confirmation: "não coincide com a confirmação"
-        blank: "não pode ficar em branco"
       models:
         user:
           attributes:
