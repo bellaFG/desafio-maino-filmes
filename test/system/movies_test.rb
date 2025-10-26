@@ -2,50 +2,68 @@ require "application_system_test_case"
 
 class MoviesTest < ApplicationSystemTestCase
   setup do
-    @movie = movies(:one)
+    Warden.test_mode!
+    @user = users(:one)
+    login_as(@user, scope: :user)
+    @movie = Movie.create!(
+      title: "Test Movie",
+      director: "Test Director",
+      year: 2023,
+      duration: 120,
+      synopsis: "Test synopsis",
+      user: @user
+    )
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "visiting the index" do
-    visit movies_url
-    assert_selector "h1", text: "Movies"
+    visit movies_url(locale: :en)
+    assert_selector "h2", text: I18n.t("movies.index.title")
   end
 
-  test "should create movie" do
-    visit movies_url
-    click_on "New movie"
+  test "creating a Movie" do
+    visit movies_url(locale: :en)
+    click_on I18n.t("movies.index.add_new")
 
-    fill_in "Director", with: @movie.director
-    fill_in "Duration", with: @movie.duration
-    fill_in "Synopsis", with: @movie.synopsis
-    fill_in "Title", with: @movie.title
-    fill_in "User", with: @movie.user_id
-    fill_in "Year", with: @movie.year
-    click_on "Create Movie"
+    fill_in Movie.human_attribute_name("title"), with: "New Movie"
+    fill_in Movie.human_attribute_name("director"), with: "New Director"
+    fill_in Movie.human_attribute_name("year"), with: 2024
+    fill_in Movie.human_attribute_name("duration"), with: 130
+    fill_in Movie.human_attribute_name("synopsis"), with: "New synopsis"
+    
+    click_on I18n.t("helpers.submit.create")
 
-    assert_text "Movie was successfully created"
-    click_on "Back"
+    assert_text I18n.t("movies.notices.created")
   end
 
-  test "should update Movie" do
-    visit movie_url(@movie)
-    click_on "Edit this movie", match: :first
+  test "updating a Movie" do
+    visit movies_url(locale: :en)
+    click_on I18n.t("movies.index.edit"), match: :first
 
-    fill_in "Director", with: @movie.director
-    fill_in "Duration", with: @movie.duration
-    fill_in "Synopsis", with: @movie.synopsis
-    fill_in "Title", with: @movie.title
-    fill_in "User", with: @movie.user_id
-    fill_in "Year", with: @movie.year
-    click_on "Update Movie"
+    fill_in Movie.human_attribute_name("title"), with: "Updated Movie"
+    click_on I18n.t("helpers.submit.update")
 
-    assert_text "Movie was successfully updated"
-    click_on "Back"
+    assert_text I18n.t("movies.notices.updated")
   end
 
-  test "should destroy Movie" do
-    visit movie_url(@movie)
-    click_on "Destroy this movie", match: :first
+  test "showing a Movie" do
+    visit movies_url(locale: :en)
+    click_on I18n.t("movies.index.view_details"), match: :first
 
-    assert_text "Movie was successfully destroyed"
+    assert_selector "h1", text: @movie.title
+    assert_text @movie.synopsis
+  end
+
+  test "destroying a Movie" do
+    visit movies_url(locale: :en)
+
+    accept_confirm do
+      click_on I18n.t("movies.index.delete"), match: :first
+    end
+
+    assert_text I18n.t("movies.notices.destroyed")
   end
 end
