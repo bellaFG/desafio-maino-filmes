@@ -1079,3 +1079,7 @@ a:hover {
   align-items: center;
   margin-bottom: 1.5rem;
 }
+
+.index-header h2 {
+  margin: 0;
+}

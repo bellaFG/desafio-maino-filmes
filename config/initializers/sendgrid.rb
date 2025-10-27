@@ -31,5 +31,5 @@ ActionMailer::Base.delivery_method = :sendgrid_api
 
 # Define remetente padrão global
 ActionMailer::Base.default_options = {
-  from: ENV["MAIL_SENDER"]
+  from: ENV["MAIL_SENDER"] || "no-reply@desafio-maino-filmes.onrender.com"
 }
