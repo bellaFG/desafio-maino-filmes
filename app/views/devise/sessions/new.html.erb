@@ -1,19 +1,30 @@
-<!-- Turbo desativado para evitar erro 422 (CSRF) em produção -->
-<h2>Login</h2>
+<div class="form-container">
+  <h2 class="form-title"><%= t('devise.sessions.new.sign_in') %></h2>
 
-<%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, data: { turbo: false }) do |f| %>
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, class: "form-control" %>
-  </div>
+  <% if resource.errors.any? %>
+    <div class="alert">
+      <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-  </div>
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, class: "login-form", data: { turbo: false }) do |f| %>
+    <div class="form-group">
+      <%= f.label :email, t('activerecord.attributes.user.email'), class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="form-actions" style="display: flex; gap: 1rem; align-items: center; justify-content: flex-end;">
-    <%= f.submit t('devise.sessions.new.sign_in'), class: "btn btn--primary" %>
-    <%= link_to t('devise.passwords.new.forgot_password'), new_password_path(resource_name), class: "btn btn--secondary" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.label :password, t('activerecord.attributes.user.password'), class: "form-label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+    </div>
+
+    <div class="form-actions" style="display: flex; gap: 1rem; align-items: center; justify-content: flex-end;">
+      <%= f.submit t('devise.sessions.new.sign_in'), class: "btn btn--primary" %>
+      <%= link_to t('devise.passwords.new.forgot_password'), new_password_path(resource_name), class: "btn btn--secondary" %>
+    </div>
+  <% end %>
+</div>

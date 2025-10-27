@@ -1,6 +1,16 @@
 <div class="form-container">
   <h2 class="form-title"><%= t('devise.registrations.edit.title') %></h2>
 
+  <% if resource.errors.any? %>
+    <div class="alert">
+      <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
                html: { method: :put, multipart: true }, class: "edit-profile-form") do |f| %>
     <%= devise_error_messages! %>
@@ -20,12 +30,9 @@
     <!-- Avatar / Foto de Perfil -->
     <div class="form-group avatar-group">
       <%= f.label :avatar, t('devise.registrations.edit.avatar'), class: "form-label" %>
-
       <div class="avatar-preview">
         <% if resource.avatar.attached? && resource.persisted? && !resource.avatar.blob&.new_record? %>
           <%= image_tag url_for(resource.avatar), class: "avatar-thumb", alt: t('devise.registrations.edit.current_avatar') %>
-
-          <!-- Botão de remover avatar -->
           <div class="remove-avatar">
             <%= f.hidden_field :remove_avatar, value: "false", id: "remove_avatar_field" %>
             <button
@@ -40,7 +47,6 @@
           <%= image_tag "default-user.png", class: "avatar-thumb", alt: t('devise.registrations.edit.default_avatar') %>
         <% end %>
       </div>
-
       <%= f.file_field :avatar, accept: "image/png,image/jpeg", class: "form-control-file input-avatar" %>
     </div>
 
@@ -66,8 +72,8 @@
 
     <!-- Ações -->
     <div class="form-actions">
-      <%= f.submit t('devise.registrations.edit.update'), class: "button btn-submit" %>
-      <%= link_to t('devise.registrations.edit.cancel'), root_path, class: "button btn-cancel" %>
+      <%= f.submit t('devise.registrations.edit.update'), class: "btn btn--primary" %>
+      <%= link_to t('devise.registrations.edit.cancel'), root_path, class: "btn btn--secondary" %>
     </div>
   <% end %>
 </div>
