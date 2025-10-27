@@ -209,6 +209,18 @@ Os testes cobrem models, controllers, helpers e garantem que toda a arquitetura 
 
 ---
 
+## ✉️ E-mails de Notificação e Recuperação de Senha
+
+- O envio de e-mails (notificações de importação, recuperação de senha, etc.) é feito via **SendGrid API**.
+- Para produção (Render), configure as variáveis de ambiente:
+  - `SENDGRID_API_KEY` — sua chave da API do SendGrid
+  - `MAIL_SENDER` — e-mail verificado no painel do SendGrid
+- **Atenção:**  
+  No plano gratuito do Render, os e-mails enviados pelo SendGrid costumam cair na caixa de spam.  
+  Recomende aos usuários que verifiquem o spam ao solicitar recuperação de senha ou notificações.
+
+---
+
 ## 👩‍💻 Autor
 
 Desenvolvido por Isabella Fernandes Gonzales para o Desafio Técnico Full Stack — Mainô.
