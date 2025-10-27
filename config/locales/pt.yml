@@ -58,6 +58,7 @@ pt:
             email:
               blank: "não pode ficar em branco"
               taken: "já está em uso"
+              not_found: "não encontrado"
             password:
               blank: "não pode ficar em branco"
             password_confirmation:
@@ -74,6 +75,7 @@ pt:
         restrict_dependent_destroy:
           one: "Não é possível excluir o registro pois existe um %{record} dependente"
           many: "Não é possível excluir o registro pois existem %{record} dependentes"
+        not_found: "não encontrado"
 
   search:
     placeholder: "Buscar filmes..."
